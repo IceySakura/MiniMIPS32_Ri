@@ -4,6 +4,7 @@ module id_stage(
     
     // 从取指阶段获得的PC值
     input  wire [`INST_ADDR_BUS]    id_pc_i,
+    input  wire [`INST_ADDR_BUS]    id_debug_wb_pc,  // 供调试使用的PC值，上板测试时务必删除该信号
 
     // 从指令存储器读出的指令字
     input  wire [`INST_BUS     ]    id_inst_i,
@@ -26,7 +27,9 @@ module id_stage(
     output wire                     rreg1,
     output wire [`REG_ADDR_BUS ]    ra1,
     output wire                     rreg2,
-    output wire [`REG_ADDR_BUS ]    ra2
+    output wire [`REG_ADDR_BUS ]    ra2,
+    
+    output       [`INST_ADDR_BUS] 	debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
     );
     
     // 根据小端模式组织指令字
@@ -81,6 +84,8 @@ module id_stage(
     assign id_src1_o = (rreg1 == `READ_ENABLE   ) ? rd1 : `ZERO_WORD;
 
     // 获得源操作数2。如果immsel信号有效，则源操作数1为立即数；否则为从读通用寄存器堆端口2获得的数据
-    assign id_src2_o = (rreg2 == `READ_ENABLE   ) ? rd2 : `ZERO_WORD;                     
+    assign id_src2_o = (rreg2 == `READ_ENABLE   ) ? rd2 : `ZERO_WORD;           
+    
+    assign debug_wb_pc = id_debug_wb_pc;    // 上板测试时务必删除该语句      
 
 endmodule

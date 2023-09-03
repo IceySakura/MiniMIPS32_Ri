@@ -9,12 +9,15 @@ module exe_stage (
     input  wire [`REG_BUS 		] 	exe_src2_i,
     input  wire [`REG_ADDR_BUS 	] 	exe_wa_i,
     input  wire 					exe_wreg_i,
+    input  wire [`INST_ADDR_BUS]    exe_debug_wb_pc,  // 供调试使用的PC值，上板测试时务必删除该信号
 
     // 送至执行阶段的信息
     output wire [`ALUOP_BUS	    ] 	exe_aluop_o,
     output wire [`REG_ADDR_BUS 	] 	exe_wa_o,
     output wire 					exe_wreg_o,
-    output wire [`REG_BUS 		] 	exe_wd_o
+    output wire [`REG_BUS 		] 	exe_wd_o,
+    
+    output wire [`INST_ADDR_BUS] 	debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
     );
 
     // 直接传到下一阶段
@@ -30,5 +33,7 @@ module exe_stage (
     
     // 根据操作类型alutype确定执行阶段最终的运算结果（既可能是待写入目的寄存器的数据，也可能是访问数据存储器的地址）
     assign exe_wd_o = (exe_alutype_i == `LOGIC    ) ? logicres  : `ZERO_WORD;
+    
+    assign debug_wb_pc = exe_debug_wb_pc;    // 上板测试时务必删除该语句 
 
 endmodule

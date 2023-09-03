@@ -10,6 +10,11 @@ module MiniMIPS32_SYS(
     wire [`INST_ADDR_BUS] iaddr;
     wire                  ice;
     wire [`INST_BUS     ] inst;
+    
+    wire [`INST_ADDR_BUS]  debug_wb_pc;       // 供调试使用的PC值，上板测试时务必删除该信号
+    wire                   debug_wb_rf_wen;   // 供调试使用的PC值，上板测试时务必删除该信号
+    wire [`REG_ADDR_BUS  ] debug_wb_rf_wnum;  // 供调试使用的PC值，上板测试时务必删除该信号
+    wire [`WORD_BUS      ] debug_wb_rf_wdata;  // 供调试使用的PC值，上板测试时务必删除该信号
 
     clkdiv clocking
    (
@@ -32,7 +37,11 @@ module MiniMIPS32_SYS(
         .cpu_rst_n(sys_rst_n),
         .iaddr(iaddr),
         .ice(ice),
-        .inst(inst)
+        .inst(inst),
+        .debug_wb_pc(debug_wb_pc),            // 供调试使用的PC值，上板测试时务必删除该信号
+        .debug_wb_rf_wen(debug_wb_rf_wen),    // 供调试使用的PC值，上板测试时务必删除该信号
+        .debug_wb_rf_wnum(debug_wb_rf_wnum),  // 供调试使用的PC值，上板测试时务必删除该信号
+        .debug_wb_rf_wdata(debug_wb_rf_wdata) // 供调试使用的PC值，上板测试时务必删除该信号
     );
 
 endmodule

@@ -6,7 +6,8 @@ module if_stage (
     
     output  reg                     ice,
     output 	reg  [`INST_ADDR_BUS] 	pc,
-    output 	wire [`INST_ADDR_BUS]	iaddr
+    output 	     [`INST_ADDR_BUS]	iaddr,
+    output       [`INST_ADDR_BUS] 	debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
     );
     
     wire [`INST_ADDR_BUS] pc_next; 
@@ -29,5 +30,7 @@ module if_stage (
     
     // TODO：指令存储器的访问地址没有根据其所处范围进行进行固定地址映射，需要修改!!!
     assign iaddr = (ice == `CHIP_DISABLE) ? `PC_INIT : pc;    // 获得访问指令存储器的地址
+    
+    assign debug_wb_pc = pc;   // 上板测试时务必删除该语句
 
 endmodule
