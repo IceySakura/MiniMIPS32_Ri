@@ -23,7 +23,6 @@
 
 #define REG_NAME(index) regfile[index]
 
-/* All function defined with 'make_helper' return the length of the operation. */
 #define make_helper(name) void name(uint32_t pc)
 
 static inline uint32_t instr_fetch(uint32_t addr, size_t len) {

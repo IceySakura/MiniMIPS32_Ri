@@ -13,7 +13,7 @@ static void decode_r_type(uint32_t instr) {
 	op_src1->val = reg_w(op_src1->reg);
 	
 	op_src2->type = OP_TYPE_REG;
-	op_src2->imm = (instr & RT_MASK) >> (RD_SIZE + SHAMT_SIZE + FUNC_SIZE);
+	op_src2->reg = (instr & RT_MASK) >> (IMM_SIZE);
 	op_src2->val = reg_w(op_src2->reg);
 
 	op_dest->type = OP_TYPE_REG;
@@ -27,3 +27,39 @@ make_helper(and) {
 	sprintf(assembly, "and   %s,   %s,   %s", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), REG_NAME(op_src2->reg));
 }
 
+make_helper(addu) {
+
+	decode_r_type(instr);
+	reg_w(op_dest->reg) = op_src1->val + op_src2->val;
+	sprintf(assembly, "addu   %s,   %s,   %s", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), REG_NAME(op_src2->reg));
+}
+
+make_helper(or) {
+	
+	decode_r_type(instr);
+	reg_w(op_dest->reg) = (op_src1->val | op_src2->val);
+	sprintf(assembly, "or   %s,   %s,   %s", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), REG_NAME(op_src2->reg));
+}
+
+make_helper(xor) {
+
+	decode_r_type(instr);
+	reg_w(op_dest->reg) = (op_src1->val ^ op_src2->val);
+	sprintf(assembly, "xor   %s,   %s,   %s", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), REG_NAME(op_src2->reg));
+}
+
+make_helper(sll) {
+	
+	printf("sll\n");
+	if(instr == 0)
+	{
+		// nop
+		sprintf(assembly, "nop");
+	}
+	else
+	{
+		decode_r_type(instr);
+		reg_w(op_dest->reg) = (op_src2->val << ((instr & SHAMT_MASK) >> (FUNC_SIZE)));
+		sprintf(assembly, "sll   %s,   %s,   0x%02x", REG_NAME(op_dest->reg), REG_NAME(op_src2->reg), instr & SHAMT_MASK);
+	}
+}
