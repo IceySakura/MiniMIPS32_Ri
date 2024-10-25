@@ -1,5 +1,7 @@
 #include "monitor.h"
+#include "watchpoint.h"
 #include "helper.h"
+#include "expr.h"
 
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
@@ -66,6 +68,22 @@ void cpu_exec(volatile uint32_t n) {
 #endif
 
 		/* TODO: check watchpoints here. */
+		WP *wp = get_head();
+		while(wp != NULL)
+		{
+			bool success = true;
+			uint32_t value = expr(wp->expr, &success);
+			if(value != wp->value)
+			{
+				printf("Hit watchpoint %d at address 0x%08x\n", wp->NO, cpu.pc);
+				printf("Expr: %s\n", wp->expr);
+				printf("Old value: 0x%08x\n", wp->value);
+				printf("New value: 0x%08x\n", value);
+				wp->value = value;
+				temu_state = STOP;
+			}
+			wp = wp->next;
+		}
 
 
 		if(temu_state != RUNNING) { return; }

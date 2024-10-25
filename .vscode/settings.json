@@ -1,0 +1,12 @@
+{
+	"files.associations": {
+		"helper.h": "c",
+		"operand.h": "c",
+		"expr.h": "c",
+		"temu.h": "c",
+		"memory.h": "c",
+		"common.h": "c",
+		"reg.h": "c",
+		"monitor.h": "c"
+	}
+}

@@ -1,6 +1,6 @@
 #include "temu.h"
 
-#define ENTRY_START 0xbfc00000
+#define ENTRY_START 0xbfc00000 // the beginning of inst.bin, virtual address
 
 char *exec_file;
 

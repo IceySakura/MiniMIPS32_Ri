@@ -1,4 +1,6 @@
 #include "monitor.h"
+#include "watchpoint.h"
+#include "expr.h"
 #include "temu.h"
 
 #include <stdlib.h>
@@ -36,6 +38,155 @@ static int cmd_q(char *args) {
 	return -1;
 }
 
+// Execute for N steps, N default for 1
+static int cmd_si(char *args)
+{
+	int n;
+	if(args == NULL)
+	{
+		n = 1;
+	}
+	else
+	{
+		sscanf(args, "%d", &n);
+	}
+	cpu_exec(n);
+	return 0;
+}
+
+// Display register value or watchpoint value
+static int cmd_info(char *args)
+{
+	if(args == NULL)
+	{
+		printf("info r, display register value.\n");
+		printf("info w, display watchpoint value.\n");
+	}
+	else if(args[0] == 'r')
+	{
+		display_reg();
+	}
+	else if(args[0] == 'w')
+	{
+		printf("NO\tExpr\tValue\n");
+		print_wp_rcs(get_head());
+	}
+	else
+	{
+		printf("Unknown command.\n");
+	}
+	return 0;
+}
+
+// Display ram value
+static int cmd_x(char *args)
+{
+	int n;
+	uint32_t addr;
+
+	char* tmp = strtok(NULL, " ");
+	if(tmp == NULL)
+	{
+		printf("Format: x N EXPR\n");
+		return 0;
+	}
+	sscanf(tmp, "%d", &n);
+
+	bool success = true;
+	addr = expr(strtok(NULL, " "), &success);
+	if(!success)
+	{
+		printf("Invalid expression.\n");
+		return 0;
+	}
+
+	int i;
+	for(i = 0; i < n; i++)
+	{
+		if(i % 4 == 0)
+		{
+			printf("0x%08x: ", addr + i * 4);
+		}
+		printf("0x%08x ", mem_read(addr + i * 4, 4));
+		if(i % 4 == 3)
+		{
+			printf("\n");
+		}
+	}
+	if(i % 4 != 0)
+	{
+		printf("\n");
+	}
+	return 0;
+}
+
+// Calculate expr value
+static int cmd_p(char *args)
+{
+	if(args == NULL)
+	{
+		printf("Please input expression.\n");
+		return 0;
+	}
+
+	bool success = true;
+	uint32_t result = expr(args, &success);
+	if(success)
+	{
+		printf("0x%08x(%d)\n", result, result);
+	}
+	else
+	{
+		printf("Invalid expression.\n");
+	}
+	return 0;
+}
+
+// Set watch point
+static int cmd_w(char *args)
+{
+	if(args == NULL)
+	{
+		printf("Please input expression.\n");
+		return 0;
+	}
+
+	WP *wp = new_wp();
+	strcpy(wp->expr, args);
+	bool success = true;
+	wp->value = expr(args, &success);
+	if(success)
+	{
+		printf("Set watchpoint #%d: %s\n", wp->NO, wp->expr);
+	}
+	else
+	{
+		printf("Invalid expression.\n");
+		free_wp(wp);
+	}
+	return 0;
+}
+
+// Delete watch point
+static int cmd_d(char *args)
+{
+	int n;
+	sscanf(args, "%d", &n);
+	WP *p = get_head();
+	while(p != NULL)
+	{
+		if(p->NO == n)
+		{
+			free_wp(p);
+			printf("Delete watchpoint #%d.\n", n);
+			return 0;
+		}
+		p = p->next;
+	}
+	printf("Watchpoint not found.\n");
+	return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -45,8 +196,13 @@ static struct {
 } cmd_table [] = {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
-	{ "q", "Exit TEMU", cmd_q }
-
+	{ "q", "Exit NEMU", cmd_q },
+	{ "si", "Execute for N steps, N default for 1", cmd_si},
+	{ "info", "Display register value or watchpoint value", cmd_info},
+	{ "x", "Display ram value", cmd_x},
+	{ "p", "Calculate expr value", cmd_p},
+	{ "w", "Set watch point", cmd_w},
+	{ "d", "Delete watch point", cmd_d},
 	/* TODO: Add more commands */
 
 };
