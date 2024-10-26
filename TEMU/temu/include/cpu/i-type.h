@@ -5,6 +5,7 @@ make_helper(lui);
 make_helper(ori);
 make_helper(andi);
 make_helper(addiu);
+make_helper(addi);
 make_helper(bne);
 make_helper(beq);
 make_helper(lw);

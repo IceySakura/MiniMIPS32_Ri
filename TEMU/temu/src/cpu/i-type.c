@@ -51,7 +51,14 @@ make_helper(addiu) {
 	
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = op_src1->val + op_src2->imm;
-	sprintf(assembly, "addiu   %s,   %s,   0x%04x", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), op_src2->simm);
+	sprintf(assembly, "addiu   %s,   %s,   0x%04x", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), sext(op_src2->simm));
+}
+
+make_helper(addi) {
+
+	decode_imm_type(instr);
+	reg_w(op_dest->reg) = op_src1->val + sext(op_src2->simm);
+	sprintf(assembly, "addi   %s,   %s,   0x%04x", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), sext(op_src2->simm));
 }
 
 make_helper(bne) {
@@ -76,26 +83,26 @@ make_helper(lw) {
 
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = mem_read(op_src1->val + sext(op_src2->simm), 4);
-	sprintf(assembly, "lw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), op_src2->simm, REG_NAME(op_src1->reg));
+	sprintf(assembly, "lw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
 }
 
 make_helper(sw) {
 	
 	decode_imm_type(instr);
 	mem_write(op_src1->val + sext(op_src2->simm), 4, reg_w(op_dest->reg));
-	sprintf(assembly, "sw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), op_src2->simm, REG_NAME(op_src1->reg));
+	sprintf(assembly, "sw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
 }
 
 make_helper(lb) {
 
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = mem_read(op_src1->val + sext(op_src2->simm), 1);
-	sprintf(assembly, "lb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), op_src2->simm, REG_NAME(op_src1->reg));
+	sprintf(assembly, "lb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
 }
 
 make_helper(sb) {
 	
 	decode_imm_type(instr);
 	mem_write(op_src1->val + sext(op_src2->simm), 1, reg_w(op_dest->reg));
-	sprintf(assembly, "sb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), op_src2->simm, REG_NAME(op_src1->reg));
+	sprintf(assembly, "sb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
 }

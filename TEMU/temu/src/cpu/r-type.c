@@ -49,8 +49,7 @@ make_helper(xor) {
 }
 
 make_helper(sll) {
-	
-	printf("sll\n");
+
 	if(instr == 0)
 	{
 		// nop
@@ -60,6 +59,21 @@ make_helper(sll) {
 	{
 		decode_r_type(instr);
 		reg_w(op_dest->reg) = (op_src2->val << ((instr & SHAMT_MASK) >> (FUNC_SIZE)));
-		sprintf(assembly, "sll   %s,   %s,   0x%02x", REG_NAME(op_dest->reg), REG_NAME(op_src2->reg), instr & SHAMT_MASK);
+		sprintf(assembly, "sll   %s,   %s,   0x%02x", REG_NAME(op_dest->reg), REG_NAME(op_src2->reg), ((instr & SHAMT_MASK) >> (FUNC_SIZE)));
 	}
+}
+
+make_helper(sra) {
+	
+	decode_r_type(instr);
+	reg_w(op_dest->reg) = ((int32_t)op_src2->val >> ((instr & SHAMT_MASK) >> (FUNC_SIZE)));
+	sprintf(assembly, "sra   %s,   %s,   0x%02x", REG_NAME(op_dest->reg), REG_NAME(op_src2->reg), ((instr & SHAMT_MASK) >> (FUNC_SIZE)));
+}
+
+make_helper(jalr) {
+
+	decode_r_type(instr);
+	reg_w(op_dest->reg) = cpu.pc + 4;
+	cpu.pc = op_src1->val - 4;
+	sprintf(assembly, "jalr   %s   %s", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg));
 }

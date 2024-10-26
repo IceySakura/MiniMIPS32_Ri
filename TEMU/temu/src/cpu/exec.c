@@ -13,8 +13,8 @@ uint32_t instr;
 op_fun opcode_table [64] = {
 /* 0x00 */	_2byte_esc, inv, inv, inv,
 /* 0x04 */	beq, bne, inv, inv,
-/* 0x08 */	andi, addiu, inv, inv,
-/* 0x0c */	inv, ori, inv, lui,
+/* 0x08 */	addi, addiu, inv, inv,
+/* 0x0c */	andi, ori, inv, lui,
 /* 0x10 */	inv, inv, temu_trap, inv,
 /* 0x14 */	inv, inv, inv, inv,
 /* 0x18 */	inv, inv, inv, inv,
@@ -30,9 +30,9 @@ op_fun opcode_table [64] = {
 };
 
 op_fun _2byte_opcode_table [64] = {
-/* 0x00 */	sll, inv, inv, inv, 
+/* 0x00 */	sll, inv, sra, inv, 
 /* 0x04 */	inv, inv, inv, inv, 
-/* 0x08 */	inv, inv, inv, inv, 
+/* 0x08 */	inv, jalr, inv, inv, 
 /* 0x0c */	inv, inv, inv, inv, 
 /* 0x10 */	inv, inv, inv, inv, 
 /* 0x14 */	inv, inv, inv, inv, 
@@ -54,7 +54,8 @@ make_helper(exec) {
 	opcode_table[ ops_decoded.opcode ](pc);
 }
 
-static make_helper(_2byte_esc) { // R type
+// R type
+static make_helper(_2byte_esc) {
 	ops_decoded.func = instr & FUNC_MASK;
 	_2byte_opcode_table[ops_decoded.func](pc); 
 }

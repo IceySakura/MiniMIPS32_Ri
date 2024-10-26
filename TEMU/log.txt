@@ -4,22 +4,44 @@
 1fc0000c:   00 00 00 00         nop
 1fc00010:   00 00 00 00         nop
 1fc00014:   a2 01 00 03         sb   $at,   0x0003($s0)
+[./temu/src/monitor/expr.c,161,eval] reg found: $at
+[./temu/src/monitor/expr.c,154,eval] hex found: 0x0003
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
 1fc00018:   34 01 00 ee         ori   $at,   $zero,   0x00ee
 1fc0001c:   00 00 00 00         nop
+[./temu/src/monitor/expr.c,154,eval] hex found: 0x0004
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
+[./temu/src/monitor/expr.c,154,eval] hex found: 0x0002
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
+[./temu/src/monitor/expr.c,154,eval] hex found: 0x0000
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
+[./temu/src/monitor/expr.c,154,eval] hex found: 0x0001
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
+[./temu/src/monitor/expr.c,154,eval] hex found: 0x0002
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
+[./temu/src/monitor/expr.c,154,eval] hex found: 0x0003
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
 1fc00020:   00 00 00 00         nop
 1fc00024:   00 00 00 00         nop
 1fc00028:   a2 01 00 02         sb   $at,   0x0002($s0)
+[./temu/src/monitor/expr.c,161,eval] reg found: $at
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
 1fc0002c:   34 01 00 dd         ori   $at,   $zero,   0x00dd
 1fc00030:   00 00 00 00         nop
 1fc00034:   00 00 00 00         nop
 1fc00038:   00 00 00 00         nop
 1fc0003c:   a2 01 00 01         sb   $at,   0x0001($s0)
+[./temu/src/monitor/expr.c,161,eval] reg found: $at
+[./temu/src/monitor/expr.c,154,eval] hex found: 0x0001
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
 1fc00040:   34 01 00 cc         ori   $at,   $zero,   0x00cc
 1fc00044:   00 00 00 00         nop
 1fc00048:   00 00 00 00         nop
 1fc0004c:   00 00 00 00         nop
 1fc00050:   a2 01 00 00         sb   $at,   0x0000($s0)
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
 1fc00054:   82 02 00 03         lb   $v0,   0x0003($s0)
+[./temu/src/monitor/expr.c,161,eval] reg found: $v0
 1fc00058:   00 00 00 00         nop
 1fc0005c:   3c 01 44 55         lui   $at,   0x4455
 1fc00060:   00 00 00 00         nop
@@ -30,6 +52,8 @@
 1fc00074:   00 00 00 00         nop
 1fc00078:   00 00 00 00         nop
 1fc0007c:   ae 01 00 08         sw   $at,   0x0008($s0)
+[./temu/src/monitor/expr.c,161,eval] reg found: $s0
 1fc00080:   8e 02 00 08         lw   $v0,   0x0008($s0)
+[./temu/src/monitor/expr.c,161,eval] reg found: $v0
 1fc00084:   00 00 00 00         nop
 1fc00088:   4a 00 00 00         temu_trap

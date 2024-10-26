@@ -21,7 +21,7 @@ void print_bin_instr(uint32_t pc) {
 	int i;
 	int l = sprintf(asm_buf, "%8x:   ", pc);
 	for(i = 3; i >= 0; i --) {
-		l += sprintf(asm_buf + l, "%02x ", instr_fetch(pc + i, 1));
+		l += sprintf(asm_buf + l, "%02x ", instr_fetch(pc + i, 1)); // little endian
 	}
 	sprintf(asm_buf + l, "%*.s", 8, "");
 }
