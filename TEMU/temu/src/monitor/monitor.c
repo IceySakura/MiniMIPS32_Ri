@@ -1,4 +1,5 @@
 #include "temu.h"
+#include "golden.h"
 
 #define ENTRY_START 0xbfc00000 // the beginning of inst.bin, virtual address
 
@@ -26,6 +27,7 @@ void init_monitor(int argc, char *argv[]) {
 	/* Open the log file. */
 	exec_file = argv[1];
 	init_log();
+	init_golden();
 
 	/* Compile the regular expressions. */
 	init_regex();

@@ -1,11 +1,14 @@
 #include "helper.h"
+
 #include "monitor.h"
+#include "golden.h"
+
 #include "reg.h"
 #include "memory/memory.h"
 
 // sign extent 16 bits to 32 bits
 int32_t sext(int32_t x) {
-	return (int32_t)(int16_t)x;
+	return (int32_t)((int16_t)x);
 }
 
 extern uint32_t instr;
@@ -31,6 +34,7 @@ make_helper(lui) {
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = (op_src2->val << 16);
 	sprintf(assembly, "lui   %s,   0x%04x", REG_NAME(op_dest->reg), op_src2->imm);
+	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(ori) {
@@ -38,6 +42,7 @@ make_helper(ori) {
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = op_src1->val | op_src2->val;
 	sprintf(assembly, "ori   %s,   %s,   0x%04x", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), op_src2->imm);
+	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(andi) {
@@ -45,20 +50,23 @@ make_helper(andi) {
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = op_src1->val & op_src2->val;
 	sprintf(assembly, "andi   %s,   %s,   0x%04x", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), op_src2->imm);
+	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(addiu) {
 	
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = op_src1->val + op_src2->imm;
-	sprintf(assembly, "addiu   %s,   %s,   0x%04x", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), sext(op_src2->simm));
+	sprintf(assembly, "addiu   %s,   %s,   0x%04x(%u)", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), op_src2->imm, op_src2->imm);
+	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(addi) {
 
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = op_src1->val + sext(op_src2->simm);
-	sprintf(assembly, "addi   %s,   %s,   0x%04x", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), sext(op_src2->simm));
+	sprintf(assembly, "addi   %s,   %s,   0x%04x(%d)", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), sext(op_src2->simm), sext(op_src2->simm));
+	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(bne) {
@@ -84,6 +92,7 @@ make_helper(lw) {
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = mem_read(op_src1->val + sext(op_src2->simm), 4);
 	sprintf(assembly, "lw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
+	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(sw) {
@@ -98,6 +107,7 @@ make_helper(lb) {
 	decode_imm_type(instr);
 	reg_w(op_dest->reg) = mem_read(op_src1->val + sext(op_src2->simm), 1);
 	sprintf(assembly, "lb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
+	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(sb) {

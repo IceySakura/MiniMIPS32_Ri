@@ -49,5 +49,6 @@ clean:
 	rm -f -r $(BUILD_DIR)
 	rm -f -r ./mips_sc/build
 	rm -f log.txt
+	rm -f GoldenTrace.txt
 	rm -f *.bin
 
