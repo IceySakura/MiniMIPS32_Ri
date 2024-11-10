@@ -30,7 +30,7 @@ op_fun opcode_table [64] = {
 };
 
 op_fun _2byte_opcode_table [64] = {
-/* 0x00 */	sll, inv, sra, inv, 
+/* 0x00 */	sll, inv, inv, sra, 
 /* 0x04 */	inv, inv, inv, inv, 
 /* 0x08 */	inv, jalr, inv, inv, 
 /* 0x0c */	inv, inv, inv, inv, 
