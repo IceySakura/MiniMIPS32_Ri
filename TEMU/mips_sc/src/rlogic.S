@@ -3,6 +3,7 @@
    .globl main
    .text
 main:
-   and $v1, $v0, $at	# $v1 = $v0 & $at
+   and $a0, $v0, $at		# $a0 = $v0 & $at
+   or $a1, $v0, $at	    	# $a1 = $v0 | $at
    
    HIT_GOOD_TRAP		#stop temu
