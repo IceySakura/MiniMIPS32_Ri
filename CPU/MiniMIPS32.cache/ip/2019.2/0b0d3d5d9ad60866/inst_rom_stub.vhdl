@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
 -- Date        : Sun Nov 10 18:32:47 2024
 -- Host        : Legion-Singer running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               E:/Labs/COAProj/MiniMIPS32_Ri/CPU/MiniMIPS32.srcs/sources_1/ip/inst_rom/inst_rom_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
+--               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ inst_rom_stub.vhdl
 -- Design      : inst_rom
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7k325tffg900-2
@@ -12,7 +12,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity inst_rom is
+entity decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix is
   Port ( 
     clka : in STD_LOGIC;
     ena : in STD_LOGIC;
@@ -20,9 +20,9 @@ entity inst_rom is
     douta : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
 
-end inst_rom;
+end decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix;
 
-architecture stub of inst_rom is
+architecture stub of decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix is
 attribute syn_black_box : boolean;
 attribute black_box_pad_pin : string;
 attribute syn_black_box of stub : architecture is true;
