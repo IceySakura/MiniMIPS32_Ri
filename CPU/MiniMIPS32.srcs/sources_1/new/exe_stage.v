@@ -46,6 +46,7 @@ module exe_stage (
 	always @(*) begin
 		case (exe_aluop_i)
 			`MINIMIPS32_SLL: shiftres = exe_src2_i << exe_src1_i;
+			`MINIMIPS32_SRA: shiftres = $signed(exe_src2_i) >>> exe_src1_i;
 			default:    shiftres = `ZERO_WORD;
 		endcase
 	end

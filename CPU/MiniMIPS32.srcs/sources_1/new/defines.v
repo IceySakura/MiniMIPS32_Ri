@@ -42,6 +42,7 @@
 `define MINIMIPS32_MFHI            8'h0C
 `define MINIMIPS32_MFLO            8'h0D
 `define MINIMIPS32_SLL             8'h11
+`define MINIMIPS32_SRA             8'h12
 `define MINIMIPS32_MULT            8'h14
 `define MINIMIPS32_ADD             8'h18
 `define MINIMIPS32_SUBU            8'h1B
