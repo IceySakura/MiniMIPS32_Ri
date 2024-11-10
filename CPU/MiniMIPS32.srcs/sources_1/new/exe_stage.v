@@ -29,7 +29,9 @@ module exe_stage (
 	always @(*) begin
 		case (exe_aluop_i)
 			`MINIMIPS32_AND: logicres = exe_src1_i & exe_src2_i;
-			`MINIMIPS32_ORI:  logicres = exe_src1_i | exe_src2_i;
+			`MINIMIPS32_OR:  logicres = exe_src1_i | exe_src2_i;
+			`MINIMIPS32_XOR: logicres = exe_src1_i ^ exe_src2_i;
+			`MINIMIPS32_ADD: logicres = exe_src1_i + exe_src2_i;
 			default:    logicres = `ZERO_WORD;
 		endcase
 	end

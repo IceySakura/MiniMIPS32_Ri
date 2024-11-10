@@ -48,30 +48,32 @@ module id_stage(
     wire inst_reg  = ~|op;
     wire inst_and  = inst_reg& func[5]&~func[4]&~func[3]& func[2]&~func[1]&~func[0];
 	wire inst_or   = inst_reg& func[5]&~func[4]&~func[3]& func[2]&~func[1]& func[0];
+	wire inst_xor  = inst_reg& func[5]&~func[4]&~func[3]& func[2]& func[1]&~func[0];
+	wire inst_addu = inst_reg& func[5]&~func[4]&~func[3]&~func[2]&~func[1]& func[0];
     /*------------------------------------------------------------------------------*/
 
     /*-------------------- 第二级译码逻辑：生成具体控制信号 --------------------*/
     // 操作类型alutype
     assign id_alutype_o[2] = 1'b0;
-    assign id_alutype_o[1] = inst_and | inst_or;
-    assign id_alutype_o[0] = 1'b0;
+    assign id_alutype_o[1] = inst_and | inst_or | inst_xor;
+    assign id_alutype_o[0] = inst_addu;
 
 	// 内部操作码aluop
 	assign id_aluop_o[7]   = 1'b0;
 	assign id_aluop_o[6]   = 1'b0;
 	assign id_aluop_o[5]   = 1'b0;
-	assign id_aluop_o[4]   = inst_and | inst_or;
-	assign id_aluop_o[3]   = inst_and | inst_or;
-	assign id_aluop_o[2]   = inst_and | inst_or;
-	assign id_aluop_o[1]   = 1'b0;
+	assign id_aluop_o[4]   = inst_and | inst_or | inst_xor | inst_addu;
+	assign id_aluop_o[3]   = inst_and | inst_or | inst_xor | inst_addu;
+	assign id_aluop_o[2]   = inst_and | inst_or | inst_xor;
+	assign id_aluop_o[1]   = inst_xor;
 	assign id_aluop_o[0]   = inst_or;
 
     // 写通用寄存器使能信号
-    assign id_wreg_o       = inst_and | inst_or;
+    assign id_wreg_o       = inst_and | inst_or | inst_xor | inst_addu;
     // 读通用寄存器堆端口1使能信号
-    assign rreg1 = inst_and | inst_or;
+    assign rreg1 = inst_and | inst_or | inst_xor | inst_addu;
     // 读通用寄存器堆读端口2使能信号
-    assign rreg2 = inst_and | inst_or;
+    assign rreg2 = inst_and | inst_or | inst_xor | inst_addu;
     /*------------------------------------------------------------------------------*/
 
     // 读通用寄存器堆端口1的地址为rs字段，读端口2的地址为rt字段

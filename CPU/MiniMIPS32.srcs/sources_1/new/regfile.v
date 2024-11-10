@@ -27,7 +27,7 @@ module regfile(
 		if (cpu_rst_n == `RST_ENABLE) begin
 			regs[ 0] <= `ZERO_WORD;
 			regs[ 1] <= 32'h10101010;     //注意：寄存器1和2复位后应该均是0x00000000，此处赋了其他初值是因为如果只有R-型指令是无法给寄存器赋值的。因此后续加入I-型指令后可恢复为初值为0的设置
-			regs[ 2] <= 32'h01011111;
+			regs[ 2] <= 32'h00011011;
 			regs[ 3] <= `ZERO_WORD;
 			regs[ 4] <= `ZERO_WORD;
 			regs[ 5] <= `ZERO_WORD;
