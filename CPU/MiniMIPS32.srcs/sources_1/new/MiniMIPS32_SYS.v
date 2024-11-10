@@ -7,9 +7,18 @@ module MiniMIPS32_SYS(
     );
 
     wire                  cpu_clk_50M;
+
+	// inst_rom
     wire [`INST_ADDR_BUS] iaddr;
     wire                  ice;
     wire [`INST_BUS     ] inst;
+
+	// data_ram
+	wire [`WORD_BUS] 	dout;
+	wire [`WORD_BUS] 	din;
+	wire [`WORD_BUS] 	daddr;
+	wire [3 : 0]		we;
+	wire 				dce;
     
     wire [`INST_ADDR_BUS]  debug_wb_pc;       // 供调试使用的PC值，上板测试时务必删除该信号
     wire                   debug_wb_rf_wen;   // 供调试使用的PC值，上板测试时务必删除该信号
@@ -32,12 +41,26 @@ module MiniMIPS32_SYS(
       .douta(inst)  // output wire [31 : 0] douta
     );
 
+	data_ram data_ram0 (
+	  .clka(cpu_clk_50M),    
+	  .ena(dce),      
+	  .wea(we),      
+	  .addra(daddr),  
+	  .dina(din),     
+	  .douta(dout)  
+	);
+
     MiniMIPS32 minimips32 (
         .cpu_clk_50M(cpu_clk_50M),
         .cpu_rst_n(sys_rst_n),
         .iaddr(iaddr),
         .ice(ice),
         .inst(inst),
+		.dout(dout),
+		.din(din),
+		.daddr(daddr),
+		.we(we),
+		.dce(dce),
         .debug_wb_pc(debug_wb_pc),            // 供调试使用的PC值，上板测试时务必删除该信号
         .debug_wb_rf_wen(debug_wb_rf_wen),    // 供调试使用的PC值，上板测试时务必删除该信号
         .debug_wb_rf_wnum(debug_wb_rf_wnum),  // 供调试使用的PC值，上板测试时务必删除该信号

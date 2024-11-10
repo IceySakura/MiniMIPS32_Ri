@@ -3,16 +3,17 @@ Time resolution is 1 ps
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
 Block Memory Generator module MiniMIPS32_SYS_tb.SoC.inst_rom0.inst.native_mem_module.blk_mem_gen_v8_4_4_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
-0xbfc00000	 1	0x00001234
-0xbfc00004	 2	0x00005678
-0xbfc00008	 3	0x00009abc
-0xbfc0001c	 1	0x12340000
-0xbfc00020	 2	0x56780000
-0xbfc00024	 3	0x9abc0000
-0xbfc00038	 4	0x68ac0000
-0xbfc0003c	 1	0x00000000
-0xbfc00040	 2	0x00000000
-0xbfc00058	 5	0x00000000
-0xbfc0005c	 3	0x9abc56f8
-0xbfc00060	 4	0x12340000
+0xbfc00000  5  0x0000037f
+0xbfc00004  4  0x0000123f
+0xbfc00008  3  0x0000070f
+0xbfc0000c  2  0x00003f1f
+0xbfc0001c  1  0x00001234
+0xbfc00020  4  0x00000a8e
+0xbfc00028  5  0x00007e3e
+0xbfc0002c  5  0x00003f23
+0xbfc0003c  6  0x00005153
+0xbfc00048  7  0x00005157
+0xbfc0004c  8  0x000027d2
+0xbfc00054  9  0xffffa4f3
+0xbfc00058  9  0x12340000
 $stop called at time : 2200 ns : File "E:/Labs/COAProj/MiniMIPS32_Ri/CPU/MiniMIPS32.srcs/sim_1/new/MiniMIPS32_SYS_tb.v" Line 32

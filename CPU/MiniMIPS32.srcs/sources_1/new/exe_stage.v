@@ -9,6 +9,7 @@ module exe_stage (
     input  wire [`REG_BUS 		] 	exe_src2_i,
     input  wire [`REG_ADDR_BUS 	] 	exe_wa_i,
     input  wire 					exe_wreg_i,
+	input  wire                     exe_mreg_i,
     input  wire [`INST_ADDR_BUS]    exe_debug_wb_pc,  // 供调试使用的PC值，上板测试时务必删除该信号
 
     // 送至执行阶段的信息
@@ -16,6 +17,7 @@ module exe_stage (
     output wire [`REG_ADDR_BUS 	] 	exe_wa_o,
     output wire 					exe_wreg_o,
     output wire [`REG_BUS 		] 	exe_wd_o,
+	output wire                     exe_mreg_o,
     
     output wire [`INST_ADDR_BUS] 	debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
     );
@@ -32,6 +34,7 @@ module exe_stage (
 	always @(*) begin
 		case (exe_aluop_i)
 			`MINIMIPS32_ADD: arithres = exe_src1_i + exe_src2_i;
+			`MINIMIPS32_LB:  arithres = exe_src1_i + exe_src2_i;
 			default:    arithres = `ZERO_WORD;
 		endcase
 	end
@@ -54,6 +57,7 @@ module exe_stage (
 
     assign exe_wa_o   = exe_wa_i;
     assign exe_wreg_o = exe_wreg_i;
+	assign exe_mreg_o = exe_mreg_i;
     
     // 根据操作类型alutype确定执行阶段最终的运算结果（既可能是待写入目的寄存器的数据，也可能是访问数据存储器的地址）
 	always @(*) begin
