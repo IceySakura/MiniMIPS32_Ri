@@ -47,30 +47,31 @@ module id_stage(
     /*-------------------- 第一级译码逻辑：确定当前需要译码的指令 --------------------*/
     wire inst_reg  = ~|op;
     wire inst_and  = inst_reg& func[5]&~func[4]&~func[3]& func[2]&~func[1]&~func[0];
+	wire inst_or   = inst_reg& func[5]&~func[4]&~func[3]& func[2]&~func[1]& func[0];
     /*------------------------------------------------------------------------------*/
 
     /*-------------------- 第二级译码逻辑：生成具体控制信号 --------------------*/
     // 操作类型alutype
     assign id_alutype_o[2] = 1'b0;
-    assign id_alutype_o[1] = inst_and;
+    assign id_alutype_o[1] = inst_and | inst_or;
     assign id_alutype_o[0] = 1'b0;
 
-    // 内部操作码aluop
-    assign id_aluop_o[7]   = 1'b0;
-    assign id_aluop_o[6]   = 1'b0;
-    assign id_aluop_o[5]   = 1'b0;
-    assign id_aluop_o[4]   = inst_and;
-    assign id_aluop_o[3]   = inst_and;
-    assign id_aluop_o[2]   = inst_and;
-    assign id_aluop_o[1]   = 1'b0;
-    assign id_aluop_o[0]   = 1'b0;
+	// 内部操作码aluop
+	assign id_aluop_o[7]   = 1'b0;
+	assign id_aluop_o[6]   = 1'b0;
+	assign id_aluop_o[5]   = 1'b0;
+	assign id_aluop_o[4]   = inst_and | inst_or;
+	assign id_aluop_o[3]   = inst_and | inst_or;
+	assign id_aluop_o[2]   = inst_and | inst_or;
+	assign id_aluop_o[1]   = 1'b0;
+	assign id_aluop_o[0]   = inst_or;
 
     // 写通用寄存器使能信号
-    assign id_wreg_o       = inst_and;
+    assign id_wreg_o       = inst_and | inst_or;
     // 读通用寄存器堆端口1使能信号
-    assign rreg1 = inst_and;
+    assign rreg1 = inst_and | inst_or;
     // 读通用寄存器堆读端口2使能信号
-    assign rreg2 = inst_and;
+    assign rreg2 = inst_and | inst_or;
     /*------------------------------------------------------------------------------*/
 
     // 读通用寄存器堆端口1的地址为rs字段，读端口2的地址为rt字段

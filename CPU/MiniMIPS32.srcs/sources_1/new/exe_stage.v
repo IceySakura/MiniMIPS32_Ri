@@ -23,10 +23,16 @@ module exe_stage (
     // 直接传到下一阶段
     assign exe_aluop_o = exe_aluop_i;
     
-    wire [`REG_BUS       ]      logicres;       // 保存逻辑运算的结果
+    reg [`REG_BUS       ]      logicres;       // 保存逻辑运算的结果
     
     // 根据内部操作码aluop进行逻辑运算
-    assign logicres = (exe_aluop_i == `MINIMIPS32_AND )  ? (exe_src1_i & exe_src2_i) : `ZERO_WORD;
+	always @(*) begin
+		case (exe_aluop_i)
+			`MINIMIPS32_AND: logicres = exe_src1_i & exe_src2_i;
+			`MINIMIPS32_ORI:  logicres = exe_src1_i | exe_src2_i;
+			default:    logicres = `ZERO_WORD;
+		endcase
+	end
 
     assign exe_wa_o   = exe_wa_i;
     assign exe_wreg_o = exe_wreg_i;
