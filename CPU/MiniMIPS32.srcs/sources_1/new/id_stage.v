@@ -51,32 +51,35 @@ module id_stage(
 	wire inst_or   = inst_reg& func[5]&~func[4]&~func[3]& func[2]&~func[1]& func[0];
 	wire inst_xor  = inst_reg& func[5]&~func[4]&~func[3]& func[2]& func[1]&~func[0];
 	wire inst_addu = inst_reg& func[5]&~func[4]&~func[3]&~func[2]&~func[1]& func[0];
-	wire inst_sll  = inst_reg&~func[5]&~func[4]&~func[3]&~func[2]&~func[1]&~func[0];
+	wire inst_sll  = inst_reg&~func[5]&~func[4]&~func[3]&~func[2]&~func[1]&~func[0]&(|id_inst); // 非全零，区分 nop
 	wire inst_sra  = inst_reg&~func[5]&~func[4]&~func[3]&~func[2]& func[1]& func[0];
 	// I type
-	wire inst_ori = ~op[5]&~op[4]& op[3]& op[2]&~op[1]& op[0];
-	wire inst_andi= ~op[5]&~op[4]& op[3]& op[2]&~op[1]&~op[0];
-	wire inst_lui = ~op[5]&~op[4]& op[3]& op[2]& op[1]& op[0];
+	wire inst_ori  = ~op[5]&~op[4]& op[3]& op[2]&~op[1]& op[0];
+	wire inst_andi = ~op[5]&~op[4]& op[3]& op[2]&~op[1]&~op[0];
+	wire inst_lui  = ~op[5]&~op[4]& op[3]& op[2]& op[1]& op[0];
+	wire inst_addiu= ~op[5]&~op[4]& op[3]&~op[2]&~op[1]& op[0];
+	wire inst_addi = ~op[5]&~op[4]& op[3]&~op[2]&~op[1]&~op[0]; 
     /*------------------------------------------------------------------------------*/
 
     /*-------------------- 第二级译码逻辑：生成具体控制信号 --------------------*/
     // 操作类型alutype
     assign id_alutype_o[2] = inst_sll | inst_sra;
     assign id_alutype_o[1] = inst_and | inst_or | inst_xor | inst_ori | inst_andi | inst_lui;
-    assign id_alutype_o[0] = inst_addu;
+    assign id_alutype_o[0] = inst_addu| inst_addiu| inst_addi;
 
 	// 内部操作码aluop
 	assign id_aluop_o[7]   = 1'b0;
 	assign id_aluop_o[6]   = 1'b0;
 	assign id_aluop_o[5]   = 1'b0;
-	assign id_aluop_o[4]   = inst_and | inst_or | inst_xor | inst_addu | inst_sll | inst_sra | inst_ori | inst_andi;
-	assign id_aluop_o[3]   = inst_and | inst_or | inst_xor | inst_addu | inst_ori | inst_andi;
+	assign id_aluop_o[4]   = inst_and | inst_or | inst_xor | inst_addu | inst_sll | inst_sra | inst_ori  | inst_andi | inst_addiu | inst_addi;
+	assign id_aluop_o[3]   = inst_and | inst_or | inst_xor | inst_addu | inst_ori | inst_andi| inst_addiu| inst_addi;
 	assign id_aluop_o[2]   = inst_and | inst_or | inst_xor | inst_ori  | inst_andi| inst_lui;
 	assign id_aluop_o[1]   = inst_xor | inst_sra;
 	assign id_aluop_o[0]   = inst_or  | inst_sll| inst_ori | inst_lui;
 
     // 写通用寄存器使能信号
-    assign id_wreg_o       = inst_and | inst_or | inst_xor | inst_addu | inst_sll | inst_sra | inst_ori | inst_andi | inst_lui;
+    assign id_wreg_o       = inst_and | inst_or  | inst_xor | inst_addu | inst_sll | inst_sra 
+						   | inst_ori | inst_andi| inst_lui | inst_addiu| inst_addi;
     // 读通用寄存器堆端口1使能信号
     assign rreg1 = 1'b1;
     // 读通用寄存器堆读端口2使能信号
@@ -88,11 +91,11 @@ module id_stage(
 	wire sext;
 	wire upper;
 	wire immsel;
-	assign shift = inst_sll | inst_sra; 						// shift信号有效时，源操作数1为移位位数
-	assign rt_sel = inst_ori | inst_andi | inst_lui;			// rt_sel信号有效时，目的寄存器为rt字段
-	assign sext = 1'b0;											// sext信号有效时，立即数为符号扩展
-	assign upper = inst_lui;									// upper信号有效时，立即数为高16位
-	assign immsel = inst_ori | inst_andi | inst_lui;			// immsel信号有效时，源操作数2为立即数
+	assign shift = inst_sll | inst_sra; 												// shift信号有效时，源操作数1为移位位数
+	assign rt_sel = inst_ori | inst_andi | inst_lui | inst_addiu| inst_addi;			// rt_sel信号有效时，目的寄存器为rt字段
+	assign sext = inst_addiu | inst_addi;												// sext信号有效时，立即数为符号扩展
+	assign upper = inst_lui;															// upper信号有效时，立即数为高16位
+	assign immsel = inst_ori | inst_andi | inst_lui | inst_addiu| inst_addi;			// immsel信号有效时，源操作数2为立即数
     /*------------------------------------------------------------------------------*/
 
     // 读通用寄存器堆端口1的地址为rs字段，读端口2的地址为rt字段
@@ -106,9 +109,9 @@ module id_stage(
 	assign id_src1_o = shift ? {27'b0, sa} : rd1;
 
 	// 处理立即数
-	wire extimm;
-	wire uppimm;
-	wire finimm;
+	wire [`REG_BUS] extimm;
+	wire [`REG_BUS] uppimm;
+	wire [`REG_BUS] finimm;
 	assign extimm = sext ? {imm[15], imm} : {16'b0, imm};
 	assign uppimm = {imm, 16'b0};
 	assign finimm = upper ? uppimm : extimm;

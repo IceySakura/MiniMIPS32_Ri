@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-// Date        : Sun Nov 10 19:32:11 2024
+// Date        : Sun Nov 10 20:17:55 2024
 // Host        : Legion-Singer running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               E:/Labs/COAProj/MiniMIPS32_Ri/CPU/MiniMIPS32.srcs/sources_1/ip/inst_rom/inst_rom_stub.v

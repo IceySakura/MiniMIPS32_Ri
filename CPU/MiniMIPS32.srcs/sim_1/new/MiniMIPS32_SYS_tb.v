@@ -45,11 +45,15 @@ module MiniMIPS32_SYS_tb();
 	
 	always @(posedge soc_clk) begin
 	   if(debug_wb_rf_wen && debug_wb_rf_wnum!=5'd0) begin
-//	       $display("--------------------------------------------------------------");
-//           $display("[%t]ns",$time/1000);
+	   /*
+	       $display("--------------------------------------------------------------");
+           $display("[%t]ns",$time/1000);
            $display("reference: PC = 0x%8h, wb_rf_wnum = 0x%2h, wb_rf_wdata = 0x%8h",
                       debug_wb_pc, debug_wb_rf_wnum, debug_wb_rf_wdata);
-//           $display("--------------------------------------------------------------");    
+           $display("--------------------------------------------------------------");
+           */
+           $display("0x%8h\t%d\t0x%8h",
+                      debug_wb_pc, debug_wb_rf_wnum, debug_wb_rf_wdata);    
 	   end
 	end
 
