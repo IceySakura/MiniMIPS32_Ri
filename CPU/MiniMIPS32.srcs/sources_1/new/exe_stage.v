@@ -40,6 +40,7 @@ module exe_stage (
 			`MINIMIPS32_AND: logicres = exe_src1_i & exe_src2_i;
 			`MINIMIPS32_OR:  logicres = exe_src1_i | exe_src2_i;
 			`MINIMIPS32_XOR: logicres = exe_src1_i ^ exe_src2_i;
+			`MINIMIPS32_LUI: logicres = exe_src2_i;
 			default:    logicres = `ZERO_WORD;
 		endcase
 	end
