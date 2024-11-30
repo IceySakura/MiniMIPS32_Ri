@@ -2,18 +2,20 @@
 
 module exe_stage (
 
-    // 从译码阶段获得的信息
+    // 从 ID 阶段获得的信息
     input  wire [`ALUTYPE_BUS	] 	exe_alutype_i,
     input  wire [`ALUOP_BUS	    ] 	exe_aluop_i,
     input  wire [`REG_BUS 		] 	exe_src1_i,
     input  wire [`REG_BUS 		] 	exe_src2_i,
     input  wire [`REG_ADDR_BUS 	] 	exe_wa_i,
+    input  wire 					exe_mreg_i,
     input  wire 					exe_wreg_i,
     input  wire [`INST_ADDR_BUS]    exe_debug_wb_pc,  // 供调试使用的PC值，上板测试时务必删除该信号
 
-    // 送至执行阶段的信息
+    // 送至 MEM 阶段的信息
     output wire [`ALUOP_BUS	    ] 	exe_aluop_o,
     output wire [`REG_ADDR_BUS 	] 	exe_wa_o,
+    output wire 					exe_mreg_o,
     output wire 					exe_wreg_o,
     output wire [`REG_BUS 		] 	exe_wd_o,
     
@@ -52,8 +54,9 @@ module exe_stage (
 		endcase
 	end
 
-    assign exe_wa_o   = exe_wa_i;
+    assign exe_mreg_o = exe_mreg_i;
     assign exe_wreg_o = exe_wreg_i;
+    assign exe_wa_o   = exe_wa_i;
     
     // 根据操作类型alutype确定执行阶段最终的运算结果（既可能是待写入目的寄存器的数据，也可能是访问数据存储器的地址）
 	always @(*) begin
