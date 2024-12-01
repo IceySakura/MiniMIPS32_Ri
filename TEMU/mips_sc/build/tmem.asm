@@ -6,16 +6,14 @@ build/tmem
 Disassembly of section .text:
 
 80000000 <main>:
-80000000:	80010000 	lb	at,0(zero)
-80000004:	80020001 	lb	v0,1(zero)
+80000000:	80010003 	lb	at,3(zero)
+80000004:	8c030008 	lw	v1,8(zero)
+80000008:	8c020000 	lw	v0,0(zero)
 	...
-8000001c:	80030005 	lb	v1,5(zero)
-80000020:	80240007 	lb	a0,7(at)
-80000024:	80450008 	lb	a1,8(v0)
-80000028:	8c060000 	lw	a2,0(zero)
-8000002c:	8c070004 	lw	a3,4(zero)
-80000030:	00000000 	nop
-80000034:	4a000000 	c2	0x0
+8000001c:	a0010007 	sb	at,7(zero)
+80000020:	ac030004 	sw	v1,4(zero)
+80000024:	a0030002 	sb	v1,2(zero)
+80000028:	4a000000 	c2	0x0
 
 Disassembly of section .data:
 
@@ -29,5 +27,5 @@ wdata():
 Disassembly of section .reginfo:
 
 00000000 <.reginfo>:
-   0:	000000fe 	0xfe
+   0:	0000000e 	0xe
 	...

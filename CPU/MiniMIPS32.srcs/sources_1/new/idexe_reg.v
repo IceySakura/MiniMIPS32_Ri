@@ -12,6 +12,7 @@ module idexe_reg (
     input  wire [`REG_ADDR_BUS ]  id_wa,
     input  wire                   id_mreg,
     input  wire                   id_wreg,
+    input  wire [`WORD_BUS     ]  id_din,
     input  wire [`INST_ADDR_BUS]  id_debug_wb_pc, // 供调试使用的PC值，上板测试时务必删除该信号
     
     // 送至执行阶段的信息
@@ -22,6 +23,7 @@ module idexe_reg (
     output reg  [`REG_ADDR_BUS ]  exe_wa,
     output reg                    exe_mreg,
     output reg                    exe_wreg,
+    output reg  [`WORD_BUS     ]  exe_din,
     output reg  [`INST_ADDR_BUS]  exe_debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
     );
 
@@ -35,6 +37,7 @@ module idexe_reg (
             exe_wa 			   <= `REG_NOP;
             exe_mreg 		   <= `WRITE_DISABLE;
             exe_wreg    	   <= `WRITE_DISABLE;
+            exe_din 		   <= `ZERO_WORD;
             exe_debug_wb_pc    <= `PC_INIT;   // 上板测试时务必删除该语句
         end
         // 将来自译码阶段的信息寄存并送至执行阶段
@@ -46,6 +49,7 @@ module idexe_reg (
             exe_wa 			   <= id_wa;
             exe_mreg 		   <= id_mreg;
             exe_wreg		   <= id_wreg;
+            exe_din 		   <= id_din;
             exe_debug_wb_pc    <= id_debug_wb_pc;   // 上板测试时务必删除该语句
         end
     end

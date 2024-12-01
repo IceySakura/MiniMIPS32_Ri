@@ -42,6 +42,7 @@ module MiniMIPS32(
     wire [`REG_ADDR_BUS  ] id_wa_o;
     wire [`REG_BUS 	     ] id_src1_o;
     wire [`REG_BUS 	     ] id_src2_o;
+    wire [`WORD_BUS]       id_din_o;
 
     wire                   exe_mreg_i;
     wire 				   exe_wreg_i;
@@ -50,6 +51,7 @@ module MiniMIPS32(
     wire [`REG_ADDR_BUS  ] exe_wa_i;
     wire [`REG_BUS 	     ] exe_src1_i;
     wire [`REG_BUS 	     ] exe_src2_i;
+    wire [`WORD_BUS]       exe_din_i;
 
 //    wire [`REG_BUS 	     ] exe_hi_i;
 //    wire [`REG_BUS 	     ] exe_lo_i;
@@ -60,12 +62,14 @@ module MiniMIPS32(
     wire [`ALUOP_BUS     ] exe_aluop_o;
     wire [`REG_ADDR_BUS  ] exe_wa_o;
     wire [`REG_BUS 	     ] exe_wd_o;
+    wire [`WORD_BUS]       exe_din_o;
 
     wire                   mem_mreg_i;
     wire 				   mem_wreg_i;
     wire [`ALUOP_BUS     ] mem_aluop_i;
     wire [`REG_ADDR_BUS  ] mem_wa_i;
     wire [`REG_BUS 	     ] mem_wd_i;
+    wire [`WORD_BUS]       mem_din_i;
 
     // MEM WB
     wire                   mem_mreg_o;
@@ -112,7 +116,8 @@ module MiniMIPS32(
         .id_wreg_o(id_wreg_o),
         .id_aluop_o(id_aluop_o), .id_alutype_o(id_alutype_o),
         .id_src1_o(id_src1_o), .id_src2_o(id_src2_o),
-        .id_wa_o(id_wa_o), 
+        .id_wa_o(id_wa_o),
+        .id_din_o(id_din_o),
         .debug_wb_pc(id_debug_wb_pc_o)
     );
     
@@ -127,11 +132,13 @@ module MiniMIPS32(
         .id_alutype(id_alutype_o), .id_aluop(id_aluop_o),
         .id_src1(id_src1_o), .id_src2(id_src2_o),
         .id_wa(id_wa_o), .id_mreg(id_mreg_o), .id_wreg(id_wreg_o),
+        .id_din(id_din_o),
         .id_debug_wb_pc(id_debug_wb_pc_o),
 
         .exe_alutype(exe_alutype_i), .exe_aluop(exe_aluop_i),
         .exe_src1(exe_src1_i), .exe_src2(exe_src2_i), 
         .exe_wa(exe_wa_i), .exe_mreg(exe_mreg_i), .exe_wreg(exe_wreg_i),
+        .exe_din(exe_din_i),
         .exe_debug_wb_pc(exe_debug_wb_pc_i)
     );
     
@@ -139,11 +146,13 @@ module MiniMIPS32(
         .exe_alutype_i(exe_alutype_i), .exe_aluop_i(exe_aluop_i),
         .exe_src1_i(exe_src1_i), .exe_src2_i(exe_src2_i),
         .exe_wa_i(exe_wa_i), .exe_mreg_i(exe_mreg_i), .exe_wreg_i(exe_wreg_i),
+        .exe_din_i(exe_din_i),
         .exe_debug_wb_pc(exe_debug_wb_pc_i),
 
         .exe_aluop_o(exe_aluop_o),
         .exe_wa_o(exe_wa_o), .exe_mreg_o(exe_mreg_o), .exe_wreg_o(exe_wreg_o), 
         .exe_wd_o(exe_wd_o),
+        .exe_din_o(exe_din_o),
         .debug_wb_pc(exe_debug_wb_pc_o)
     );
         
@@ -151,11 +160,13 @@ module MiniMIPS32(
         .exe_aluop(exe_aluop_o),
         .exe_wa(exe_wa_o), .exe_mreg(exe_mreg_o), .exe_wreg(exe_wreg_o), 
         .exe_wd(exe_wd_o),
+        .exe_din(exe_din_o),
         .exe_debug_wb_pc(exe_debug_wb_pc_o),
 
         .mem_aluop(mem_aluop_i),
         .mem_wa(mem_wa_i), .mem_mreg(mem_mreg_i), .mem_wreg(mem_wreg_i), 
         .mem_wd(mem_wd_i),
+        .mem_din(mem_din_i),
         .mem_debug_wb_pc(mem_debug_wb_pc_i)
     );
 
@@ -165,6 +176,7 @@ module MiniMIPS32(
         .mem_aluop_i(mem_aluop_i),
         .mem_wa_i(mem_wa_i), 
         .mem_wd_i(mem_wd_i),
+        .mem_din_i(mem_din_i),
         .mem_debug_wb_pc(mem_debug_wb_pc_i),
 
         .dce(dce), .dwe(dwe), .daddr(daddr), .din(din),

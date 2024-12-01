@@ -52,7 +52,7 @@ module MiniMIPS32_SYS_tb();
                       debug_wb_pc, debug_wb_rf_wnum, debug_wb_rf_wdata);
            $display("--------------------------------------------------------------");
            */
-           $display("0x%8h\t%d\t0x%8h",
+           $display("0x%8h  %d  0x%8h",
                       debug_wb_pc, debug_wb_rf_wnum, debug_wb_rf_wdata);    
 	   end
 	end

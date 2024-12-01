@@ -8,13 +8,14 @@ module mem_stage (
     input  wire [`ALUOP_BUS     ]       mem_aluop_i,
     input  wire [`REG_ADDR_BUS  ]       mem_wa_i,
     input  wire [`REG_BUS       ]       mem_wd_i,
+    input  wire [`WORD_BUS      ]       mem_din_i,
     input  wire [`INST_ADDR_BUS]        mem_debug_wb_pc,  // 供调试使用的PC值，上板测试时务必删除该信号
 
     // data_ram
     output reg                  dce,
     output reg [3 : 0]          dwe,
     output wire [`WORD_BUS]     daddr,
-    output reg [`WORD_BUS]      din,
+    output wire [`WORD_BUS]     din,
     
     // 送至写回阶段的信息
     output wire                         mem_mreg_o,
@@ -34,6 +35,7 @@ module mem_stage (
 
     // to data_ram
     assign daddr = mem_wd_i;
+    assign din = mem_din_i;
 
     /* MCU */
     // 将 mem_wd_i 转为 one_hot
@@ -54,6 +56,19 @@ module mem_stage (
                 dce = 1'b1;
                 dwe = 1'b0;
                 mem_dre_o = one_hot;
+            end
+            `MINIMIPS32_LW:begin
+                dce = 1'b1;
+                dwe = 1'b0;
+                mem_dre_o = 4'b1111;
+            end
+            `MINIMIPS32_SB:begin
+                dce = 1'b1;
+                dwe = one_hot;
+            end
+            `MINIMIPS32_SW:begin
+                dce = 1'b1;
+                dwe = 4'b1111;
             end
             default:begin
                 dce = 1'b0;

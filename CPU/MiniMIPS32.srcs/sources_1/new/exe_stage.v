@@ -10,6 +10,7 @@ module exe_stage (
     input  wire [`REG_ADDR_BUS 	] 	exe_wa_i,
     input  wire 					exe_mreg_i,
     input  wire 					exe_wreg_i,
+    input  wire [`WORD_BUS 		] 	exe_din_i,
     input  wire [`INST_ADDR_BUS]    exe_debug_wb_pc,  // 供调试使用的PC值，上板测试时务必删除该信号
 
     // 送至 MEM 阶段的信息
@@ -18,12 +19,14 @@ module exe_stage (
     output wire 					exe_mreg_o,
     output wire 					exe_wreg_o,
     output wire [`REG_BUS 		] 	exe_wd_o,
+    output wire [`WORD_BUS 		] 	exe_din_o,
     
     output wire [`INST_ADDR_BUS] 	debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
     );
 
     // 直接传到下一阶段
     assign exe_aluop_o = exe_aluop_i;
+    assign exe_din_o   = exe_din_i;
     
 	reg [`REG_BUS       ]      arithres;       // 保存算术运算的结果 alutype 001
     reg [`REG_BUS       ]      logicres;       // 保存逻辑运算的结果 alutype 010
@@ -35,6 +38,9 @@ module exe_stage (
 		case (exe_aluop_i)
 			`MINIMIPS32_ADD: arithres = exe_src1_i + exe_src2_i;
             `MINIMIPS32_LB:  arithres = exe_src1_i + exe_src2_i;
+            `MINIMIPS32_LW:  arithres = exe_src1_i + exe_src2_i;
+            `MINIMIPS32_SB:  arithres = exe_src1_i + exe_src2_i;
+            `MINIMIPS32_SW:  arithres = exe_src1_i + exe_src2_i;
 			default:    arithres = `ZERO_WORD;
 		endcase
 	end

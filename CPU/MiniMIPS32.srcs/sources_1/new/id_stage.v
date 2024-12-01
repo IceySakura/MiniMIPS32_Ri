@@ -15,6 +15,7 @@ module id_stage(
     output wire [`REG_ADDR_BUS ]    id_wa_o,
     output wire [`REG_BUS      ]    id_src1_o,
     output wire [`REG_BUS      ]    id_src2_o,
+    output reg [`WORD_BUS     ]    id_din_o,
     
     input  wire [`REG_BUS      ]    rd1,
     input  wire [`REG_BUS      ]    rd2,
@@ -55,29 +56,32 @@ module id_stage(
 	wire inst_addiu= ~op[5]&~op[4]& op[3]&~op[2]&~op[1]& op[0];
 	wire inst_addi = ~op[5]&~op[4]& op[3]&~op[2]&~op[1]&~op[0];
     wire inst_lb   =  op[5]&~op[4]&~op[3]&~op[2]&~op[1]&~op[0];
+    wire inst_lw   =  op[5]&~op[4]&~op[3]&~op[2]& op[1]& op[0];
+    wire inst_sb   =  op[5]&~op[4]& op[3]&~op[2]&~op[1]&~op[0];
+    wire inst_sw   =  op[5]&~op[4]& op[3]&~op[2]& op[1]& op[0];
     /*------------------------------------------------------------------------------*/
 
     /*-------------------- 第二级译码逻辑：生成具体控制信号 --------------------*/
     // 写多路选择器使能信号
-    assign id_mreg_o       = inst_lb;
+    assign id_mreg_o       = inst_lb  | inst_lw;
     // 写通用寄存器使能信号
     assign id_wreg_o       = inst_and | inst_or  | inst_xor | inst_addu | inst_sll | inst_sra 
 						   | inst_ori | inst_andi| inst_lui | inst_addiu| inst_addi
-                           | inst_lb;
+                           | inst_lb  | inst_lw;
 
     // 操作类型alutype
     assign id_alutype_o[2] = inst_sll | inst_sra;
     assign id_alutype_o[1] = inst_and | inst_or | inst_xor | inst_ori | inst_andi | inst_lui;
-    assign id_alutype_o[0] = inst_addu| inst_addiu| inst_addi | inst_lb;
+    assign id_alutype_o[0] = inst_addu| inst_addiu| inst_addi | inst_lb | inst_lw | inst_sb | inst_sw;
 
 	// 内部操作码aluop
-	assign id_aluop_o[7]   = inst_lb;
+	assign id_aluop_o[7]   = inst_lb  | inst_lw | inst_sb | inst_sw;
 	assign id_aluop_o[6]   = 1'b0;
 	assign id_aluop_o[5]   = 1'b0;
-	assign id_aluop_o[4]   = inst_and | inst_or | inst_xor | inst_addu | inst_sll | inst_sra | inst_ori  | inst_andi | inst_addiu | inst_addi | inst_lb;
-	assign id_aluop_o[3]   = inst_and | inst_or | inst_xor | inst_addu | inst_ori | inst_andi| inst_addiu| inst_addi;
+	assign id_aluop_o[4]   = inst_and | inst_or | inst_xor | inst_addu | inst_sll | inst_sra | inst_ori  | inst_andi | inst_addiu | inst_addi | inst_lb | inst_lw | inst_sb | inst_sw;
+	assign id_aluop_o[3]   = inst_and | inst_or | inst_xor | inst_addu | inst_ori | inst_andi| inst_addiu| inst_addi | inst_sb    | inst_sw;
 	assign id_aluop_o[2]   = inst_and | inst_or | inst_xor | inst_ori  | inst_andi| inst_lui;
-	assign id_aluop_o[1]   = inst_xor | inst_sra;
+	assign id_aluop_o[1]   = inst_xor | inst_sra| inst_lw  | inst_sw;
 	assign id_aluop_o[0]   = inst_or  | inst_sll| inst_ori | inst_lui;
 
     // 读通用寄存器堆的读信号总是1，因为是在后续判断是否要使用读出的数据
@@ -90,11 +94,11 @@ module id_stage(
 	wire sext;
 	wire upper;
 	wire immsel;
-	assign shift = inst_sll | inst_sra; 												// shift信号有效时，源操作数1为移位位数
-	assign rt_sel = inst_ori | inst_andi | inst_lui | inst_addiu| inst_addi | inst_lb;	// rt_sel信号有效时，目的寄存器为rt字段
-	assign sext = inst_addiu | inst_addi | inst_lb;										// sext信号有效时，立即数为符号扩展
-	assign upper = inst_lui;															// upper信号有效时，立即数为高16位
-	assign immsel = inst_ori | inst_andi | inst_lui | inst_addiu| inst_addi | inst_lb;	// immsel信号有效时，源操作数2为立即数
+	assign shift = inst_sll | inst_sra; 												                             // shift信号有效时，源操作数1为移位位数
+	assign rt_sel = inst_ori | inst_andi | inst_lui | inst_addiu| inst_addi | inst_lb | inst_lw;	                 // rt_sel信号有效时，目的寄存器为rt字段
+	assign sext = inst_addiu | inst_addi | inst_lb  | inst_lw   | inst_sb   | inst_sw;				                 // sext信号有效时，立即数为符号扩展
+	assign upper = inst_lui;															                             // upper信号有效时，立即数为高16位
+	assign immsel = inst_ori | inst_andi | inst_lui | inst_addiu| inst_addi | inst_lb | inst_lw | inst_sb | inst_sw; // immsel信号有效时，源操作数2为立即数
     /*------------------------------------------------------------------------------*/
 
     // 读通用寄存器堆端口1的地址为rs字段，读端口2的地址为rt字段
@@ -116,6 +120,15 @@ module id_stage(
 	assign finimm = upper ? uppimm : extimm;
     // 获得源操作数2。如果immsel信号有效，则源操作数1为立即数；否则为从读通用寄存器堆端口2获得的数据
 	assign id_src2_o = immsel ? finimm : rd2;           
+
+    // din 是 rt 寄存器的值
+    always @(*) begin
+        case(id_aluop_o)
+            `MINIMIPS32_SB:  id_din_o = {4{rd2[7:0]}};
+            `MINIMIPS32_SW:  id_din_o = {rd2[7:0], rd2[15:8], rd2[23:16], rd2[31:24]};
+            default:         id_din_o = `ZERO_WORD;
+        endcase
+    end
     
     assign debug_wb_pc = id_debug_wb_pc;    // 上板测试时务必删除该语句      
 
