@@ -8,6 +8,13 @@ module MiniMIPS32(
     output wire [`INST_ADDR_BUS] iaddr,
     output wire                  ice,
     input  wire [`INST_BUS]      inst,
+
+    // data_ram
+    output wire                  dce,
+    output wire [3 : 0]          dwe,
+    output wire [`WORD_BUS]      daddr,
+    output wire [`WORD_BUS]      din,
+    input  wire [`WORD_BUS]      dout,
     
     output wire [`INST_ADDR_BUS]  debug_wb_pc,       // 供调试使用的PC值，上板测试时务必删除该信号
     output wire                   debug_wb_rf_wen,   // 供调试使用的PC值，上板测试时务必删除该信号
@@ -63,11 +70,13 @@ module MiniMIPS32(
     // MEM WB
     wire                   mem_mreg_o;
     wire 				   mem_wreg_o;
+    wire [3 : 0]           mem_dre_o;
     wire [`REG_ADDR_BUS  ] mem_wa_o;
     wire [`REG_BUS 	     ] mem_dreg_o;
 
     wire                   wb_mreg_i;
     wire 				   wb_wreg_i;
+    wire [3 : 0]           wb_dre_i;
     wire [`REG_ADDR_BUS  ] wb_wa_i;
     wire [`REG_BUS       ] wb_dreg_i;
 
@@ -158,8 +167,11 @@ module MiniMIPS32(
         .mem_wd_i(mem_wd_i),
         .mem_debug_wb_pc(mem_debug_wb_pc_i),
 
+        .dce(dce), .dwe(dwe), .daddr(daddr), .din(din),
+
         .mem_mreg_o(mem_mreg_o),
         .mem_wreg_o(mem_wreg_o),
+        .mem_dre_o(mem_dre_o),
         .mem_wa_o(mem_wa_o),
         .mem_dreg_o(mem_dreg_o),
         .debug_wb_pc(mem_debug_wb_pc_o)
@@ -168,12 +180,14 @@ module MiniMIPS32(
     memwb_reg memwb_reg0(.cpu_clk_50M(cpu_clk_50M), .cpu_rst_n(cpu_rst_n),
         .mem_mreg(mem_mreg_o),
         .mem_wreg(mem_wreg_o), 
+        .mem_dre(mem_dre_o),
         .mem_wa(mem_wa_o), 
         .mem_dreg(mem_dreg_o),
         .mem_debug_wb_pc(mem_debug_wb_pc_o),
 
         .wb_mreg(wb_mreg_i),
         .wb_wreg(wb_wreg_i),
+        .wb_dre(wb_dre_i),
         .wb_wa(wb_wa_i),  
         .wb_dreg(wb_dreg_i),
         .wb_debug_wb_pc(wb_debug_wb_pc_i)
@@ -181,12 +195,17 @@ module MiniMIPS32(
 
     wb_stage wb_stage0(
         .wb_mreg_i(wb_mreg_i),
-        .wb_wreg_i(wb_wreg_i), 
+        .wb_wreg_i(wb_wreg_i),
+        .wb_dre_i(wb_dre_i), 
         .wb_wa_i(wb_wa_i), 
         .wb_dreg_i(wb_dreg_i), 
         .wb_debug_wb_pc(wb_debug_wb_pc_i),
 
-        .wb_wa_o(wb_wa_o), .wb_wreg_o(wb_wreg_o), .wb_wd_o(wb_wd_o),
+        .dm(dout),
+
+        .wb_wreg_o(wb_wreg_o), 
+        .wb_wa_o(wb_wa_o), 
+        .wb_wd_o(wb_wd_o),
 
         .debug_wb_pc(debug_wb_pc),       
         .debug_wb_rf_wen(debug_wb_rf_wen),   

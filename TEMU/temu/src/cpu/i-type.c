@@ -7,8 +7,13 @@
 #include "memory/memory.h"
 
 // sign extent 16 bits to 32 bits
-int32_t sext(int32_t x) {
-	return (int32_t)((int16_t)x);
+int32_t sext16(int16_t x) {
+	return (int32_t)x;
+}
+
+// sign extent 8 bits to 32 bits
+int32_t sext8(int8_t x) {
+    return (int32_t)x;
 }
 
 extern uint32_t instr;
@@ -64,8 +69,8 @@ make_helper(addiu) {
 make_helper(addi) {
 
 	decode_imm_type(instr);
-	reg_w(op_dest->reg) = op_src1->val + sext(op_src2->simm);
-	sprintf(assembly, "addi   %s,   %s,   0x%04x(%d)", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), sext(op_src2->simm), sext(op_src2->simm));
+	reg_w(op_dest->reg) = op_src1->val + sext16(op_src2->simm);
+	sprintf(assembly, "addi   %s,   %s,   0x%04x(%d)", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), sext16(op_src2->simm), sext16(op_src2->simm));
 	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
@@ -73,7 +78,7 @@ make_helper(bne) {
 
 	decode_imm_type(instr);
 	if (op_src1->val != op_dest->val) {
-		cpu.pc += sext(op_src2->simm) - 4;
+		cpu.pc += sext16(op_src2->simm) - 4;
 	}
 	sprintf(assembly, "bne   %s,   %s,   0x%08x", REG_NAME(op_src1->reg), REG_NAME(op_src2->reg), cpu.pc + 4);
 }
@@ -82,7 +87,7 @@ make_helper(beq) {
 	
 	decode_imm_type(instr);
 	if (op_src1->val == op_dest->val) {
-		cpu.pc += sext(op_src2->simm) - 4;
+		cpu.pc += sext16(op_src2->simm) - 4;
 	}
 	sprintf(assembly, "beq   %s,   %s,   0x%08x", REG_NAME(op_src1->reg), REG_NAME(op_src2->reg), cpu.pc + 4); 	
 }
@@ -90,29 +95,29 @@ make_helper(beq) {
 make_helper(lw) {
 
 	decode_imm_type(instr);
-	reg_w(op_dest->reg) = mem_read(op_src1->val + sext(op_src2->simm), 4);
-	sprintf(assembly, "lw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
+	reg_w(op_dest->reg) = mem_read(op_src1->val + sext16(op_src2->simm), 4);
+	sprintf(assembly, "lw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext16(op_src2->simm), REG_NAME(op_src1->reg));
 	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(sw) {
 	
 	decode_imm_type(instr);
-	mem_write(op_src1->val + sext(op_src2->simm), 4, reg_w(op_dest->reg));
-	sprintf(assembly, "sw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
+	mem_write(op_src1->val + sext16(op_src2->simm), 4, reg_w(op_dest->reg));
+	sprintf(assembly, "sw   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext16(op_src2->simm), REG_NAME(op_src1->reg));
 }
 
 make_helper(lb) {
 
 	decode_imm_type(instr);
-	reg_w(op_dest->reg) = mem_read(op_src1->val + sext(op_src2->simm), 1);
-	sprintf(assembly, "lb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
+	reg_w(op_dest->reg) = sext8(mem_read(op_src1->val + sext16(op_src2->simm), 1));
+	sprintf(assembly, "lb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext16(op_src2->simm), REG_NAME(op_src1->reg));
 	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
 make_helper(sb) {
 	
 	decode_imm_type(instr);
-	mem_write(op_src1->val + sext(op_src2->simm), 1, reg_w(op_dest->reg));
-	sprintf(assembly, "sb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext(op_src2->simm), REG_NAME(op_src1->reg));
+	mem_write(op_src1->val + sext16(op_src2->simm), 1, reg_w(op_dest->reg));
+	sprintf(assembly, "sb   %s,   0x%04x(%s)", REG_NAME(op_dest->reg), sext16(op_src2->simm), REG_NAME(op_src1->reg));
 }

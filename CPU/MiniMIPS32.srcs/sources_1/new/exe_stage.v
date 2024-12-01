@@ -34,6 +34,7 @@ module exe_stage (
 	always @(*) begin
 		case (exe_aluop_i)
 			`MINIMIPS32_ADD: arithres = exe_src1_i + exe_src2_i;
+            `MINIMIPS32_LB:  arithres = exe_src1_i + exe_src2_i;
 			default:    arithres = `ZERO_WORD;
 		endcase
 	end
