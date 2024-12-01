@@ -17,5 +17,7 @@ main:
    lb $3, 0x5($0)
    lb $4, 0x7($1)
    lb $5, 0x8($2)
+   lw $6, 0x0($0)
+   lw $7, 0x4($0)
    
    HIT_GOOD_TRAP        # stop temu
