@@ -71,8 +71,12 @@ module regfile(
 			rd1 <= `ZERO_WORD;
 		else if (ra1 == `REG_NOP)
 			rd1 <= `ZERO_WORD;
-		else if (re1 == `READ_ENABLE)
-			rd1 <= regs[ra1];
+		else if (re1 == `READ_ENABLE) begin
+            if (we == `WRITE_ENABLE && wa == ra1) 
+                rd1 <= wd;
+            else
+                rd1 <= regs[ra1];
+        end
 		else
 			rd1 <= `ZERO_WORD;
 	end
@@ -84,8 +88,12 @@ module regfile(
 			rd2 <= `ZERO_WORD;
 		else if (ra2 == `REG_NOP)
 			rd2 <= `ZERO_WORD;
-		else if (re2 == `READ_ENABLE)
-			rd2 <= regs[ra2];
+		else if (re2 == `READ_ENABLE) begin
+            if (we == `WRITE_ENABLE && wa == ra2) 
+                rd2 <= wd;
+            else
+                rd2 <= regs[ra2];
+        end	
 		else
 			rd2 <= `ZERO_WORD;
 	end

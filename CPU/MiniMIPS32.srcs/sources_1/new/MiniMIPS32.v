@@ -68,7 +68,7 @@ module MiniMIPS32(
     wire 				   mem_wreg_i;
     wire [`ALUOP_BUS     ] mem_aluop_i;
     wire [`REG_ADDR_BUS  ] mem_wa_i;
-    wire [`REG_BUS 	     ] mem_wd_i;
+    wire [`WORD_BUS 	 ] mem_wd_i;
     wire [`WORD_BUS]       mem_din_i;
 
     // MEM WB
@@ -118,7 +118,14 @@ module MiniMIPS32(
         .id_src1_o(id_src1_o), .id_src2_o(id_src2_o),
         .id_wa_o(id_wa_o),
         .id_din_o(id_din_o),
-        .debug_wb_pc(id_debug_wb_pc_o)
+        .debug_wb_pc(id_debug_wb_pc_o),
+
+        .exe2id_wreg(exe_wreg_o),
+        .exe2id_wa(exe_wa_o),
+        .exe2id_wd(exe_wd_o),
+        .mem2id_wreg(mem_wreg_o),
+        .mem2id_wa(mem_wa_o),
+        .mem2id_wd(mem_dreg_o)
     );
     
     regfile regfile0(.cpu_clk_50M(cpu_clk_50M), .cpu_rst_n(cpu_rst_n),

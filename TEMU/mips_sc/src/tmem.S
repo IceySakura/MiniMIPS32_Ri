@@ -17,5 +17,20 @@ main:
     sb $1, 7($0)
     sw $3, 4($0)
     sb $3, 2($0)
+    nop
+    nop
+    nop
+    ori $2, $0, 0x1234
+    addiu $3, $0, 0x5678
+    nop
+    nop
+    nop
+    sw $2, 0($0)
+    sll $2, $2, 7
+    nop
+    nop
+    nop
+    sw $2, 8($0)
+    lb $1, 7($0)
    
    HIT_GOOD_TRAP        # stop temu

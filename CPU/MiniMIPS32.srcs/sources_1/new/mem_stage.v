@@ -38,7 +38,7 @@ module mem_stage (
     assign din = mem_din_i;
 
     /* MCU */
-    // 将 mem_wd_i 转为 one_hot
+    // 将 mem_wd_i[1:0] 转为 one_hot
     reg [3 : 0] one_hot;
     always @(*) begin
         case (mem_wd_i[1 : 0])
