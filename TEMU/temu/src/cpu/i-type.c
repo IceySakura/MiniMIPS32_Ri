@@ -77,10 +77,11 @@ make_helper(addi) {
 make_helper(bne) {
 
 	decode_imm_type(instr);
+//    printf("decode ok\n");
 	if (op_src1->val != op_dest->val) {
 		cpu.pc += (sext16(op_src2->simm) << 2);
 	}
-	sprintf(assembly, "bne   %s,   %s,   0x%08x", REG_NAME(op_src1->reg), REG_NAME(op_src2->reg), cpu.pc + 4);
+	sprintf(assembly, "bne   %s,   %s,   0x%08x", REG_NAME(op_src1->reg), REG_NAME(op_dest->reg), cpu.pc + 4);
 }
 
 make_helper(beq) {
@@ -89,7 +90,7 @@ make_helper(beq) {
 	if (op_src1->val == op_dest->val) {
 		cpu.pc += (sext16(op_src2->simm) << 2);
 	}
-	sprintf(assembly, "beq   %s,   %s,   0x%08x", REG_NAME(op_src1->reg), REG_NAME(op_src2->reg), cpu.pc + 4); 	
+	sprintf(assembly, "beq   %s,   %s,   0x%08x", REG_NAME(op_src1->reg), REG_NAME(op_dest->reg), cpu.pc + 4); 	
 }
 
 make_helper(lw) {
