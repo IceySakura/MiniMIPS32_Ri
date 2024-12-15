@@ -1,16 +1,29 @@
-1fc00000:   3c 10 80 40         lui   $s0,   0x8040
-1fc00004:   34 01 00 ff         ori   $at,   $zero,   0x00ff
-1fc00008:   a2 01 00 03         sb   $at,   0x0003($s0)
-1fc0000c:   34 01 00 ee         ori   $at,   $zero,   0x00ee
-1fc00010:   a2 01 00 02         sb   $at,   0x0002($s0)
-1fc00014:   34 01 00 dd         ori   $at,   $zero,   0x00dd
-1fc00018:   a2 01 00 01         sb   $at,   0x0001($s0)
-1fc0001c:   34 01 00 cc         ori   $at,   $zero,   0x00cc
-1fc00020:   a2 01 00 00         sb   $at,   0x0000($s0)
-1fc00024:   82 02 00 03         lb   $v0,   0x0003($s0)
-1fc00028:   3c 01 44 55         lui   $at,   0x4455
-1fc0002c:   34 21 66 77         ori   $at,   $at,   0x6677
-1fc00030:   ae 01 00 08         sw   $at,   0x0008($s0)
-1fc00034:   8e 02 00 08         lw   $v0,   0x0008($s0)
-1fc00038:   00 00 00 00         nop
-1fc0003c:   4a 00 00 00         temu_trap
+       0:   34 03 00 04         ori   $v1,   $zero,   0x0004
+       4:   3c 04 00 00         lui   $a0,   0x0000
+       8:   3c 05 00 00         lui   $a1,   0x0000
+       c:   24 63 ff ff         addiu   $v1,   $v1,   0xffffffff(4294967295)
+      10:   24 84 00 01         addiu   $a0,   $a0,   0x0001(1)
+      14:   00 a4 28 21         addu   $a1,   $a1,   $a0
+      18:   10 60 00 04         beq   $v1,   $a0,   0x8000001c
+      1c:   00 00 00 00         nop
+      20:   34 06 00 0c         ori   $a2,   $zero,   0x000c
+      24:   00 c0 f8 09         jalr   $ra   $a2
+       c:   24 63 ff ff         addiu   $v1,   $v1,   0xffffffff(4294967295)
+      10:   24 84 00 01         addiu   $a0,   $a0,   0x0001(1)
+      14:   00 a4 28 21         addu   $a1,   $a1,   $a0
+      18:   10 60 00 04         beq   $v1,   $a0,   0x0000001c
+      1c:   00 00 00 00         nop
+      20:   34 06 00 0c         ori   $a2,   $zero,   0x000c
+      24:   00 c0 f8 09         jalr   $ra   $a2
+       c:   24 63 ff ff         addiu   $v1,   $v1,   0xffffffff(4294967295)
+      10:   24 84 00 01         addiu   $a0,   $a0,   0x0001(1)
+      14:   00 a4 28 21         addu   $a1,   $a1,   $a0
+      18:   10 60 00 04         beq   $v1,   $a0,   0x0000001c
+      1c:   00 00 00 00         nop
+      20:   34 06 00 0c         ori   $a2,   $zero,   0x000c
+      24:   00 c0 f8 09         jalr   $ra   $a2
+       c:   24 63 ff ff         addiu   $v1,   $v1,   0xffffffff(4294967295)
+      10:   24 84 00 01         addiu   $a0,   $a0,   0x0001(1)
+      14:   00 a4 28 21         addu   $a1,   $a1,   $a0
+      18:   10 60 00 04         beq   $v1,   $a0,   0x0000002c
+      2c:   4a 00 00 00         temu_trap

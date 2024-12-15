@@ -33,6 +33,9 @@ module id_stage(
     input  wire                     mem2id_wreg,
     input  wire [`REG_ADDR_BUS ]    mem2id_wa,
     input  wire [`WORD_BUS     ]    mem2id_wd,
+
+    // branch or jump pc
+    output reg  [`INST_ADDR_BUS]    bj_pc,
     
     output       [`INST_ADDR_BUS] 	debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
     );
@@ -59,6 +62,7 @@ module id_stage(
 	wire inst_addu = inst_reg& func[5]&~func[4]&~func[3]&~func[2]&~func[1]& func[0];
 	wire inst_sll  = inst_reg&~func[5]&~func[4]&~func[3]&~func[2]&~func[1]&~func[0]&(|id_inst); // 非全零，区分 nop
 	wire inst_sra  = inst_reg&~func[5]&~func[4]&~func[3]&~func[2]& func[1]& func[0];
+    wire inst_jalr = inst_reg&~func[5]&~func[4]& func[3]&~func[2]&~func[1]& func[0];
 	// I type
 	wire inst_ori  = ~op[5]&~op[4]& op[3]& op[2]&~op[1]& op[0];
 	wire inst_andi = ~op[5]&~op[4]& op[3]& op[2]&~op[1]&~op[0];
@@ -69,24 +73,26 @@ module id_stage(
     wire inst_lw   =  op[5]&~op[4]&~op[3]&~op[2]& op[1]& op[0];
     wire inst_sb   =  op[5]&~op[4]& op[3]&~op[2]&~op[1]&~op[0];
     wire inst_sw   =  op[5]&~op[4]& op[3]&~op[2]& op[1]& op[0];
+    wire inst_beq  = ~op[5]&~op[4]&~op[3]& op[2]&~op[1]&~op[0];
+    wire inst_bne  = ~op[5]&~op[4]&~op[3]& op[2]&~op[1]& op[0];
     /*------------------------------------------------------------------------------*/
 
     /*-------------------- 第二级译码逻辑：生成具体控制信号 --------------------*/
-    // 写多路选择器使能信号
+    // 从内存写使能信号
     assign id_mreg_o       = inst_lb  | inst_lw;
     // 写通用寄存器使能信号
     assign id_wreg_o       = inst_and | inst_or  | inst_xor | inst_addu | inst_sll | inst_sra 
 						   | inst_ori | inst_andi| inst_lui | inst_addiu| inst_addi
-                           | inst_lb  | inst_lw;
+                           | inst_lb  | inst_lw  | inst_jalr;
 
     // 操作类型alutype
     assign id_alutype_o[2] = inst_sll | inst_sra;
     assign id_alutype_o[1] = inst_and | inst_or | inst_xor | inst_ori | inst_andi | inst_lui;
-    assign id_alutype_o[0] = inst_addu| inst_addiu| inst_addi | inst_lb | inst_lw | inst_sb | inst_sw;
+    assign id_alutype_o[0] = inst_addu| inst_addiu| inst_addi | inst_lb | inst_lw | inst_sb | inst_sw | inst_jalr;
 
 	// 内部操作码aluop
-	assign id_aluop_o[7]   = inst_lb  | inst_lw | inst_sb | inst_sw;
-	assign id_aluop_o[6]   = 1'b0;
+	assign id_aluop_o[7]   = inst_lb  | inst_lw | inst_sb | inst_sw | inst_jalr;
+	assign id_aluop_o[6]   = inst_jalr;
 	assign id_aluop_o[5]   = 1'b0;
 	assign id_aluop_o[4]   = inst_and | inst_or | inst_xor | inst_addu | inst_sll | inst_sra | inst_ori  | inst_andi | inst_addiu | inst_addi | inst_lb | inst_lw | inst_sb | inst_sw;
 	assign id_aluop_o[3]   = inst_and | inst_or | inst_xor | inst_addu | inst_ori | inst_andi| inst_addiu| inst_addi | inst_sb    | inst_sw;
@@ -146,6 +152,7 @@ module id_stage(
         else true_rt = mem2id_wd;
 
         if(shift) id_src1 = {27'b0, sa};
+        else if(inst_jalr) id_src1 = id_pc_i + 8;
         else id_src1 = true_rs;
         if(immsel) id_src2 = finimm;
         else id_src2 = true_rt;
@@ -162,6 +169,15 @@ module id_stage(
         endcase
     end
     
+    // branch or jump
+    wire [`INST_ADDR_BUS] pc_offset = {{14{imm[15]}}, imm, 2'b00};
+    always @(*) begin
+        if(inst_beq && (true_rs == true_rt)) bj_pc = id_pc_i + 4 + pc_offset;
+        else if(inst_bne && (true_rs != true_rt)) bj_pc = id_pc_i + 4 + pc_offset;
+        else if(inst_jalr) bj_pc = true_rs;
+        else bj_pc = 32'h00000000;
+    end
+
     assign debug_wb_pc = id_debug_wb_pc;    // 上板测试时务必删除该语句      
 
 endmodule

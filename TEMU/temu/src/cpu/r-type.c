@@ -82,7 +82,7 @@ make_helper(sra) {
 make_helper(jalr) {
 
 	decode_r_type(instr);
-	reg_w(op_dest->reg) = cpu.pc + 4;
+	reg_w(op_dest->reg) = cpu.pc + 8;
 	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 
 	cpu.pc = op_src1->val - 4;

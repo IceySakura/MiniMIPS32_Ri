@@ -1,7 +1,7 @@
 #include "temu.h"
 #include "golden.h"
 
-#define ENTRY_START 0xbfc00000 // the beginning of inst.bin, virtual address
+#define ENTRY_START 0x80000000 // the beginning of inst.bin, virtual address
 
 char *exec_file;
 

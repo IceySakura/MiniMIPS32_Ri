@@ -41,6 +41,7 @@ module exe_stage (
             `MINIMIPS32_LW:  arithres = exe_src1_i + exe_src2_i;
             `MINIMIPS32_SB:  arithres = exe_src1_i + exe_src2_i;
             `MINIMIPS32_SW:  arithres = exe_src1_i + exe_src2_i;
+            `MINIMIPS32_JAL: arithres = exe_src1_i;
 			default:    arithres = `ZERO_WORD;
 		endcase
 	end

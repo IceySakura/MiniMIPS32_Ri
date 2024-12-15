@@ -2,8 +2,8 @@
 # Vivado v2019.2 (64-bit)
 # SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
 # IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
-# Start of session at: Sun Dec  8 14:20:12 2024
-# Process ID: 10896
+# Start of session at: Sun Dec 15 16:09:30 2024
+# Process ID: 24016
 # Current directory: E:/Labs/COAProj/MiniMIPS32_Ri/CPU/MiniMIPS32.runs/data_ram_synth_1
 # Command line: vivado.exe -log data_ram.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source data_ram.tcl
 # Log file: E:/Labs/COAProj/MiniMIPS32_Ri/CPU/MiniMIPS32.runs/data_ram_synth_1/data_ram.vds

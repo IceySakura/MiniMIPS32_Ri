@@ -25,6 +25,7 @@ module MiniMIPS32(
     // IF ID
     wire [`WORD_BUS      ] if_pc_o;
     wire [`WORD_BUS      ] id_pc_i;
+    wire [`INST_ADDR_BUS]  bj_pc;
     
     // ID Register
     wire 				   re1;
@@ -98,7 +99,7 @@ module MiniMIPS32(
     wire [`INST_ADDR_BUS]   wb_debug_wb_pc_i;       // 上板测试时务必删除该信号
 
     if_stage if_stage0(.cpu_clk_50M(cpu_clk_50M), .cpu_rst_n(cpu_rst_n),
-        .pc(if_pc_o), .ice(ice), .iaddr(iaddr), .debug_wb_pc(if_debug_wb_pc));
+        .pc(if_pc_o), .ice(ice), .iaddr(iaddr), .debug_wb_pc(if_debug_wb_pc), .bj_pc(bj_pc));
     
     ifid_reg ifid_reg0(.cpu_clk_50M(cpu_clk_50M), .cpu_rst_n(cpu_rst_n),
         .if_pc(if_pc_o), .if_debug_wb_pc(if_debug_wb_pc), .id_pc(id_pc_i), .id_debug_wb_pc(id_debug_wb_pc_i)
@@ -125,7 +126,9 @@ module MiniMIPS32(
         .exe2id_wd(exe_wd_o),
         .mem2id_wreg(mem_wreg_o),
         .mem2id_wa(mem_wa_o),
-        .mem2id_wd(mem_dreg_o)
+        .mem2id_wd(mem_dreg_o),
+
+        .bj_pc(bj_pc)
     );
     
     regfile regfile0(.cpu_clk_50M(cpu_clk_50M), .cpu_rst_n(cpu_rst_n),

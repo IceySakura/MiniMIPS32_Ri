@@ -61,8 +61,8 @@ make_helper(andi) {
 make_helper(addiu) {
 	
 	decode_imm_type(instr);
-	reg_w(op_dest->reg) = op_src1->val + op_src2->imm;
-	sprintf(assembly, "addiu   %s,   %s,   0x%04x(%u)", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), op_src2->imm, op_src2->imm);
+	reg_w(op_dest->reg) = op_src1->val + sext16(op_src2->simm);
+	sprintf(assembly, "addiu   %s,   %s,   0x%04x(%u)", REG_NAME(op_dest->reg), REG_NAME(op_src1->reg), sext16(op_src2->simm), sext16(op_src2->simm));
 	golden_write(cpu.pc, op_dest->reg, reg_w(op_dest->reg));
 }
 
@@ -78,7 +78,7 @@ make_helper(bne) {
 
 	decode_imm_type(instr);
 	if (op_src1->val != op_dest->val) {
-		cpu.pc += sext16(op_src2->simm) - 4;
+		cpu.pc += (sext16(op_src2->simm) << 2);
 	}
 	sprintf(assembly, "bne   %s,   %s,   0x%08x", REG_NAME(op_src1->reg), REG_NAME(op_src2->reg), cpu.pc + 4);
 }
@@ -87,7 +87,7 @@ make_helper(beq) {
 	
 	decode_imm_type(instr);
 	if (op_src1->val == op_dest->val) {
-		cpu.pc += sext16(op_src2->simm) - 4;
+		cpu.pc += (sext16(op_src2->simm) << 2);
 	}
 	sprintf(assembly, "beq   %s,   %s,   0x%08x", REG_NAME(op_src1->reg), REG_NAME(op_src2->reg), cpu.pc + 4); 	
 }
