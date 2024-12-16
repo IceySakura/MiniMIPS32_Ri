@@ -88,6 +88,9 @@ module MiniMIPS32(
     wire 				   wb_wreg_o;
     wire [`REG_ADDR_BUS  ] wb_wa_o;
     wire [`REG_BUS       ] wb_wd_o;
+
+    // stall
+    wire                   stall;
     
     wire [`INST_ADDR_BUS]  if_debug_wb_pc;       // 上板测试时务必删除该信号
     wire [`INST_ADDR_BUS]  id_debug_wb_pc_i;       // 上板测试时务必删除该信号
@@ -99,13 +102,17 @@ module MiniMIPS32(
     wire [`INST_ADDR_BUS]   wb_debug_wb_pc_i;       // 上板测试时务必删除该信号
 
     if_stage if_stage0(.cpu_clk_50M(cpu_clk_50M), .cpu_rst_n(cpu_rst_n),
-        .pc(if_pc_o), .ice(ice), .iaddr(iaddr), .debug_wb_pc(if_debug_wb_pc), .bj_pc(bj_pc));
+        .pc_out(if_pc_o), .ice(ice), .iaddr(iaddr), .debug_wb_pc(if_debug_wb_pc), .bj_pc(bj_pc), .stall(stall));
     
     ifid_reg ifid_reg0(.cpu_clk_50M(cpu_clk_50M), .cpu_rst_n(cpu_rst_n),
-        .if_pc(if_pc_o), .if_debug_wb_pc(if_debug_wb_pc), .id_pc(id_pc_i), .id_debug_wb_pc(id_debug_wb_pc_i)
+        .if_pc(if_pc_o), .if_debug_wb_pc(if_debug_wb_pc), .id_pc(id_pc_i), .id_debug_wb_pc(id_debug_wb_pc_i),
+        .stall(stall)
     );
 
-    id_stage id_stage0(.id_pc_i(id_pc_i), 
+    id_stage id_stage0(
+        .cpu_clk_50M(cpu_clk_50M),
+
+        .id_pc_i(id_pc_i), 
         .id_inst_i(inst),
         .id_debug_wb_pc(id_debug_wb_pc_i),
 
@@ -121,12 +128,16 @@ module MiniMIPS32(
         .id_din_o(id_din_o),
         .debug_wb_pc(id_debug_wb_pc_o),
 
+        .exe2id_mreg(exe_mreg_o),
         .exe2id_wreg(exe_wreg_o),
         .exe2id_wa(exe_wa_o),
         .exe2id_wd(exe_wd_o),
+        .mem2id_mreg(mem_mreg_o),
         .mem2id_wreg(mem_wreg_o),
         .mem2id_wa(mem_wa_o),
         .mem2id_wd(mem_dreg_o),
+
+        .stall(stall),
 
         .bj_pc(bj_pc)
     );
@@ -149,7 +160,9 @@ module MiniMIPS32(
         .exe_src1(exe_src1_i), .exe_src2(exe_src2_i), 
         .exe_wa(exe_wa_i), .exe_mreg(exe_mreg_i), .exe_wreg(exe_wreg_i),
         .exe_din(exe_din_i),
-        .exe_debug_wb_pc(exe_debug_wb_pc_i)
+        .exe_debug_wb_pc(exe_debug_wb_pc_i),
+
+        .stall(stall)
     );
     
     exe_stage exe_stage0(

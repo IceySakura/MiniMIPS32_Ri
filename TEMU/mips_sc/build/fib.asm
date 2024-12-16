@@ -1,0 +1,32 @@
+
+build/fib:     file format elf32-tradlittlemips
+build/fib
+
+
+Disassembly of section .text:
+
+80000000 <main>:
+80000000:	34080001 	li	t0,0x1
+80000004:	34090001 	li	t1,0x1
+80000008:	3c048040 	lui	a0,0x8040
+8000000c:	248c0100 	addiu	t4,a0,256
+
+80000010 <loop0>:
+loop0():
+80000010:	01095021 	addu	t2,t0,t1
+80000014:	35280000 	ori	t0,t1,0x0
+80000018:	35490000 	ori	t1,t2,0x0
+8000001c:	ac890000 	sw	t1,0(a0)
+80000020:	8c8b0000 	lw	t3,0(a0)
+80000024:	00000000 	nop
+80000028:	24840004 	addiu	a0,a0,4
+8000002c:	148cfff8 	bne	a0,t4,80000010 <loop0>
+80000030:	00000000 	nop
+80000034:	00000000 	nop
+80000038:	4a000000 	c2	0x0
+
+Disassembly of section .reginfo:
+
+00000000 <.reginfo>:
+   0:	00001f10 	0x1f10
+	...

@@ -29,7 +29,7 @@ module MiniMIPS32_SYS_tb();
 		#200_000;
 		sys_rst_n = 1'b1;
 		
-		#2_000_000 $stop;
+		#20_000_000 $stop;
 	end
 	
 	always #2500 sys_clk_200M_p = ~sys_clk_200M_p;     // 每隔2.5ns，sys_clk_200M_p信号翻转一次，所以一个周期是5ns，对应200MHz

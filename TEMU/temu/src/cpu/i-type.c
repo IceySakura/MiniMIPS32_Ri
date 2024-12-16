@@ -32,6 +32,7 @@ static void decode_imm_type(uint32_t instr) {
 
 	op_dest->type = OP_TYPE_REG;
 	op_dest->reg = (instr & RT_MASK) >> (IMM_SIZE);
+    op_dest->val = reg_w(op_dest->reg);
 }
 
 make_helper(lui) {
@@ -78,6 +79,7 @@ make_helper(bne) {
 
 	decode_imm_type(instr);
 //    printf("decode ok\n");
+//    printf("op_src1->val = %d, op_dest->val = %d\n", op_src1->val, op_dest->val);
 	if (op_src1->val != op_dest->val) {
 		cpu.pc += (sext16(op_src2->simm) << 2);
 	}

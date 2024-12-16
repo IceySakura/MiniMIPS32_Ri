@@ -1,6 +1,7 @@
 `include "defines.v"
 
 module id_stage(
+    input 	wire 					cpu_clk_50M,
     
     // 从取指阶段获得的PC值
     input  wire [`INST_ADDR_BUS]    id_pc_i,
@@ -27,22 +28,27 @@ module id_stage(
     output wire [`REG_ADDR_BUS ]    ra2,
 
     // forword
+    input  wire                     exe2id_mreg,
     input  wire                     exe2id_wreg,
     input  wire [`REG_ADDR_BUS ]    exe2id_wa,
     input  wire [`WORD_BUS     ]    exe2id_wd,
+    input  wire                     mem2id_mreg,
     input  wire                     mem2id_wreg,
     input  wire [`REG_ADDR_BUS ]    mem2id_wa,
     input  wire [`WORD_BUS     ]    mem2id_wd,
 
     // branch or jump pc
     output reg  [`INST_ADDR_BUS]    bj_pc,
+
+    // stall
+    output reg                      stall,
     
     output       [`INST_ADDR_BUS] 	debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
     );
     
     // INST_ROM 读出的指令是大端序的
     // 需要根据小端模式组织指令字
-    wire [`INST_BUS] id_inst = {id_inst_i[7:0], id_inst_i[15:8], id_inst_i[23:16], id_inst_i[31:24]};
+    wire  [`INST_BUS] id_inst = {id_inst_i[7:0], id_inst_i[15:8], id_inst_i[23:16], id_inst_i[31:24]};
 
     // 提取指令字中各个字段的信息
     wire [5 :0] op   = id_inst[31:26];
@@ -116,6 +122,7 @@ module id_stage(
 	assign sext = inst_addiu | inst_addi | inst_lb  | inst_lw   | inst_sb   | inst_sw;				                 
 	assign upper = inst_lui;															                             
 	assign immsel = inst_ori | inst_andi | inst_lui | inst_addiu| inst_addi | inst_lb | inst_lw | inst_sb | inst_sw;
+    // 数据前推
     always @(*) begin
         if(exe2id_wreg && exe2id_wa == rs) fwrd1 = 2'b01;
         else if(mem2id_wreg && mem2id_wa == rs) fwrd1 = 2'b10;
@@ -176,6 +183,15 @@ module id_stage(
         else if(inst_bne && (true_rs != true_rt)) bj_pc = id_pc_i + 4 + pc_offset;
         else if(inst_jalr) bj_pc = true_rs;
         else bj_pc = 32'h00000000;
+    end
+
+    // stall
+    always @(*) begin
+        if(fwrd1 == 2'b01 && exe2id_mreg) stall = 1'b1;
+        else if(fwrd1 == 2'b10 && mem2id_mreg) stall = 1'b1;
+        else if(fwrd2 == 2'b01 && exe2id_mreg) stall = 1'b1;
+        else if(fwrd2 == 2'b10 && mem2id_mreg) stall = 1'b1;
+        else stall = 1'b0;
     end
 
     assign debug_wb_pc = id_debug_wb_pc;    // 上板测试时务必删除该语句      

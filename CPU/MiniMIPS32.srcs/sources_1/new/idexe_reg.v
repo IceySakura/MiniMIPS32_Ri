@@ -24,12 +24,14 @@ module idexe_reg (
     output reg                    exe_mreg,
     output reg                    exe_wreg,
     output reg  [`WORD_BUS     ]  exe_din,
-    output reg  [`INST_ADDR_BUS]  exe_debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
+    output reg  [`INST_ADDR_BUS]  exe_debug_wb_pc,  // 供调试使用的PC值，上板测试时务必删除该信号
+
+    input  wire                   stall
     );
 
     always @(posedge cpu_clk_50M) begin
         // 复位的时候将送至执行阶段的信息清0
-        if (cpu_rst_n == `RST_ENABLE) begin
+        if (cpu_rst_n == `RST_ENABLE || stall == 1'b1) begin
             exe_alutype 	   <= `NOP;
             exe_aluop 		   <= `MINIMIPS32_SLL;
             exe_src1 		   <= `ZERO_WORD;

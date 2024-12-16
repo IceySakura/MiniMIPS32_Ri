@@ -10,7 +10,9 @@ module ifid_reg (
 	
 	// 送至译码阶段的信息  
 	output reg  [`INST_ADDR_BUS]       id_pc,
-	output reg  [`INST_ADDR_BUS] 	   id_debug_wb_pc  // 供调试使用的PC值，上板测试时务必删除该信号
+	output reg  [`INST_ADDR_BUS] 	   id_debug_wb_pc,  // 供调试使用的PC值，上板测试时务必删除该信号
+
+    input wire                        stall
 	);
 
 	always @(posedge cpu_clk_50M) begin
@@ -20,7 +22,11 @@ module ifid_reg (
 			id_debug_wb_pc <= `PC_INIT;   // 上板测试时务必删除该语句
 		end
 		// 将来自取指阶段的信息寄存并送至译码阶段
-		else begin
+		else if (stall == 1'b1) begin
+            id_pc	<= id_pc;
+            id_debug_wb_pc <= id_debug_wb_pc;   // 上板测试时务必删除该语句
+        end
+        else begin
 			id_pc	<= if_pc;	
 			id_debug_wb_pc <= if_debug_wb_pc;   // 上板测试时务必删除该语句
 		end

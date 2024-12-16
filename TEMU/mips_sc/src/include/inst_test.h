@@ -1,4 +1,3 @@
-#define nop  ori zero, zero, 0
 #define LI(reg, imm) \
     li reg, imm
 
