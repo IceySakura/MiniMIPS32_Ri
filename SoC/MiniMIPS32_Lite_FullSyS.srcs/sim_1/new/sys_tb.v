@@ -14,12 +14,14 @@ module sys_tb();
     wire soc_clk;
 	
     wire rxd, txd;
+    reg [7 : 0] btn_rc;
 	MiniMIPS32_Lite_FullSyS SoC (
         .sys_clk_25M(sys_clk_25M),
         .sys_rst_n(sys_rst_n),
 
         .rxd(rxd),
-        .txd(txd)
+        .txd(txd),
+        .btn_rc(btn_rc)
 	);
 	
 	initial begin
@@ -129,5 +131,39 @@ module sys_tb();
 
     // 将 rxd_reg 赋值给 rxd 输出
     assign rxd = rxd_reg;
+
+    // test btn
+    initial begin
+        btn_rc = 8'b00000000;
+        #1_000_000;  
+
+        // Test case 1: Press key corresponding to btn_rc = 8'b10001000 -> btn_num = 4'hF
+        btn_rc = 8'b10001000;
+        #1_000_000;  
+        $display("Test Case 1: btn_rc = %b, Expected btn_num = F", btn_rc);
+
+        // Test case 2: Press key corresponding to btn_rc = 8'b00100100 -> btn_num = 4'h6
+        btn_rc = 8'b00100100;
+        #1_000_000;   
+        $display("Test Case 2: btn_rc = %b, Expected btn_num = 6", btn_rc);
+
+        // Test case 3: Press key corresponding to btn_rc = 8'b00010010 -> btn_num = 4'h1
+        btn_rc = 8'b00010010;
+        #1_000_000;   
+        $display("Test Case 3: btn_rc = %b, Expected btn_num = 1", btn_rc);
+
+        // Test case 4: Press key corresponding to btn_rc = 8'b01000001 -> btn_num = 4'h8
+        btn_rc = 8'b01000001;
+        #1_000_000;    
+        $display("Test Case 4: btn_rc = %b, Expected btn_num = 8", btn_rc);
+
+        // Test case 5: Invalid btn_rc (not defined in case), btn_rc = 8'b00000000 -> btn_num = 4'h0
+        btn_rc = 8'b00000000;
+        #1_000_000;       
+        $display("Test Case 5: btn_rc = %b, Expected btn_num = 0", btn_rc);
+
+        // Finish simulation
+        $stop;
+    end
 
 endmodule

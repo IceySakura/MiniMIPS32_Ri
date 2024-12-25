@@ -17,6 +17,8 @@ verilog xil_defaultlib  --include "../../../../MiniMIPS32_Lite_FullSyS.srcs/sour
 sv xil_defaultlib  --include "../../../../MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync" \
 "../../../../MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv" \
 "../../../../MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv" \
+"../../../../MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/btn_array.sv" \
+"../../../../MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv" \
 
 verilog xil_defaultlib  --include "../../../../MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync" \
 "../../../../MiniMIPS32_Lite_FullSyS.srcs/sim_1/new/sys_tb.v" \

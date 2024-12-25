@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Wed Dec 25 20:14:01 2024
+| Date         : Wed Dec 25 22:14:43 2024
 | Host         : Legion-Singer running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file MiniMIPS32_Lite_FullSyS_control_sets_placed.rpt
 | Design       : MiniMIPS32_Lite_FullSyS
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    49 |
-|    Minimum number of control sets                        |    49 |
+| Total control sets                                       |    51 |
+|    Minimum number of control sets                        |    51 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    37 |
+| Unused register locations in slices containing registers |    50 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    49 |
+| Total control sets |    51 |
 | >= 0 to < 4        |     1 |
-| >= 4 to < 6        |     1 |
+| >= 4 to < 6        |     2 |
 | >= 6 to < 8        |     0 |
 | >= 8 to < 10       |     4 |
 | >= 10 to < 12      |     4 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
-| >= 16              |    39 |
+| >= 16              |    40 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,70 +58,72 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             126 |           44 |
-| No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |             259 |           94 |
+| No           | No                    | No                     |             127 |           44 |
+| No           | No                    | Yes                    |              62 |           17 |
+| No           | Yes                   | No                     |             267 |           86 |
 | Yes          | No                    | No                     |              50 |           14 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |            1072 |          655 |
+| Yes          | Yes                   | No                     |            1108 |          491 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+-------------------------------------+---------------------------------------------------+---------------------------------------------+------------------+----------------+
-|             Clock Signal            |                   Enable Signal                   |               Set/Reset Signal              | Slice Load Count | Bel Load Count |
-+-------------------------------------+---------------------------------------------------+---------------------------------------------+------------------+----------------+
-|  sys_clk_25M_IBUF_BUFG              | ext_uart_r/tickgen/OversamplingTick               |                                             |                1 |              1 |
-|  cpu/exemem_reg0/mem_aluop_reg[2]_0 |                                                   |                                             |                1 |              4 |
-|  sys_clk_25M_IBUF_BUFG              | ext_uart_r/tickgen/FSM_onehot_RxD_state_reg[3][0] |                                             |                2 |              8 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/RxD_data_ready_reg                 | cpu/memwb_reg0/RxD_data_ready_reg_0         |                3 |              8 |
-|  sys_clk_25M_IBUF_BUFG              | ext_uart_t/tickgen/Acc_reg[20]_0[0]               |                                             |                2 |              8 |
-|  sys_clk_25M_IBUF_BUFG              | ext_uart_t/ext_uart_avai_tx_reg                   | cpu/exemem_reg0/FSM_onehot_TxD_state_reg[0] |                2 |              8 |
-|  cpu/exemem_reg0/E[0]               |                                                   |                                             |                4 |             11 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/idexe_reg0/E[0]                               |                                             |                3 |             11 |
-|  sys_clk_25M_IBUF_BUFG              | ext_uart_t/tickgen/E[0]                           |                                             |                4 |             11 |
-|  sys_clk_25M_IBUF_BUFG              | ext_uart_r/tickgen/E[0]                           |                                             |                2 |             11 |
-|  sys_clk_25M_IBUF_BUFG              |                                                   | ext_uart_t/Q[0]                             |                6 |             21 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_2[0]                  | cpu/regfile0/SR[0]                          |               16 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_5[0]                  | cpu/regfile0/SR[0]                          |               23 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_1[0]                  | cpu/regfile0/SR[0]                          |               18 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_5[0]                  | cpu/regfile0/SR[0]                          |               25 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_6[0]                  | cpu/regfile0/SR[0]                          |               18 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_4[0]                  | cpu/regfile0/SR[0]                          |               17 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_8[0]                  | cpu/regfile0/SR[0]                          |               20 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[2]_0[0]                  | cpu/regfile0/SR[0]                          |               23 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[2]_1[0]                  | cpu/regfile0/SR[0]                          |               16 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[3]_0[0]                  | cpu/regfile0/SR[0]                          |               21 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[3]_1[0]                  | cpu/regfile0/SR[0]                          |               17 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_2[0]                  | cpu/regfile0/SR[0]                          |               24 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_3[0]                  | cpu/regfile0/SR[0]                          |               14 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_0[0]                  | cpu/regfile0/SR[0]                          |               20 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_0[0]                  | cpu/regfile0/SR[0]                          |               23 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_1[0]                  | cpu/regfile0/SR[0]                          |               22 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_10[0]                 | cpu/regfile0/SR[0]                          |               17 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_3[0]                  | cpu/regfile0/SR[0]                          |               21 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_6[0]                  | cpu/regfile0/SR[0]                          |               26 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_2[0]                  | cpu/regfile0/SR[0]                          |               25 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_3[0]                  | cpu/regfile0/SR[0]                          |               23 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_5[0]                  | cpu/regfile0/SR[0]                          |               17 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_6[0]                  | cpu/regfile0/SR[0]                          |               18 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_7[0]                  | cpu/regfile0/SR[0]                          |               30 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_4[0]                  | cpu/regfile0/SR[0]                          |               28 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wreg_reg_0[0]                   | cpu/regfile0/SR[0]                          |               15 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/E[0]                               | cpu/regfile0/SR[0]                          |               21 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/idexe_reg0/E[0]                               | cpu/if_stage0/p_0_in                        |               10 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wreg_reg_1[0]                   | cpu/regfile0/SR[0]                          |               20 |             32 |
-|  n_0_2169_BUFG                      |                                                   |                                             |               10 |             32 |
-|  sys_clk_25M_IBUF_BUFG              |                                                   |                                             |               11 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_9[0]                  | cpu/regfile0/SR[0]                          |               18 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_4[0]                  | cpu/regfile0/SR[0]                          |               18 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_7[0]                  | cpu/regfile0/SR[0]                          |               15 |             32 |
-|  sys_clk_25M_IBUF_BUFG              | cpu/idexe_reg0/E[0]                               | cpu/regfile0/SR[0]                          |               11 |             32 |
-|  r_dce0_BUFG                        |                                                   |                                             |               18 |             47 |
-|  sys_clk_25M_IBUF_BUFG              |                                                   | cpu/idexe_reg0/exe_alutype[2]_i_1_n_1       |               44 |            112 |
-|  sys_clk_25M_IBUF_BUFG              |                                                   | cpu/regfile0/SR[0]                          |               44 |            126 |
-+-------------------------------------+---------------------------------------------------+---------------------------------------------+------------------+----------------+
++-------------------------------------+---------------------------------------------------+---------------------------------------+------------------+----------------+
+|             Clock Signal            |                   Enable Signal                   |            Set/Reset Signal           | Slice Load Count | Bel Load Count |
++-------------------------------------+---------------------------------------------------+---------------------------------------+------------------+----------------+
+|  sys_clk_25M_IBUF_BUFG              | ext_uart_r/tickgen/OversamplingTick               |                                       |                1 |              1 |
+|  cpu/exemem_reg0/mem_aluop_reg[2]_0 |                                                   |                                       |                1 |              4 |
+|  sys_clk_25M_IBUF_BUFG              | give_cpu_btn_num0                                 | cpu/memwb_reg0/sys_rst_n[0]           |                1 |              4 |
+|  sys_clk_25M_IBUF_BUFG              | ext_uart_t/tickgen/Acc_reg[20]_0[0]               |                                       |                2 |              8 |
+|  sys_clk_25M_IBUF_BUFG              | ext_uart_r/RxD_data_ready_reg_0                   | cpu/memwb_reg0/RxD_data_ready_reg     |                1 |              8 |
+|  sys_clk_25M_IBUF_BUFG              | ext_uart_r/tickgen/FSM_onehot_RxD_state_reg[7][0] |                                       |                1 |              8 |
+|  sys_clk_25M_IBUF_BUFG              | ext_uart_t/FSM_onehot_TxD_state_reg[0]_0          | cpu/exemem_reg0/ext_uart_avai_tx_reg  |                1 |              8 |
+|  cpu/exemem_reg0/E[0]               |                                                   |                                       |                3 |             11 |
+|  sys_clk_25M_IBUF_BUFG              | ext_uart_t/tickgen/E[0]                           |                                       |                4 |             11 |
+|  sys_clk_25M_IBUF_BUFG              | ext_uart_r/tickgen/E[0]                           |                                       |                3 |             11 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/idexe_reg0/E[0]                               |                                       |                3 |             11 |
+|  sys_clk_25M_IBUF_BUFG              |                                                   | ext_uart_t/Q[0]                       |                6 |             21 |
+|  dout__0_BUFG                       |                                                   |                                       |               12 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_0[0]                  | cpu/regfile0/SS[0]                    |               16 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wreg_reg_0[0]                   | cpu/regfile0/SS[0]                    |               20 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_4[0]                  | cpu/regfile0/SS[0]                    |               23 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_2[0]                  | cpu/regfile0/SS[0]                    |                9 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/exemem_reg0/mem_wd_reg[3]_1[0]                | cpu/regfile0/SS[0]                    |                8 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/idexe_reg0/E[0]                               | cpu/if_stage0/p_0_in                  |               17 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/idexe_reg0/E[0]                               | cpu/regfile0/SS[0]                    |               12 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/E[0]                               | cpu/regfile0/SS[0]                    |               12 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_0[0]                  | cpu/regfile0/SS[0]                    |               18 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_1[0]                  | cpu/regfile0/SS[0]                    |               13 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_2[0]                  | cpu/regfile0/SS[0]                    |               14 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_3[0]                  | cpu/regfile0/SS[0]                    |               13 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_4[0]                  | cpu/regfile0/SS[0]                    |                9 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_8[0]                  | cpu/regfile0/SS[0]                    |               18 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_4[0]                  | cpu/regfile0/SS[0]                    |               11 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wreg_reg_1[0]                   | cpu/regfile0/SS[0]                    |               11 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_5[0]                  | cpu/regfile0/SS[0]                    |               10 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[0]_6[0]                  | cpu/regfile0/SS[0]                    |               19 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_9[0]                  | cpu/regfile0/SS[0]                    |                9 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[2]_1[0]                  | cpu/regfile0/SS[0]                    |               14 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_5[0]                  | cpu/regfile0/SS[0]                    |               12 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_3[0]                  | cpu/regfile0/SS[0]                    |               26 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[2]_0[0]                  | cpu/regfile0/SS[0]                    |               12 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_6[0]                  | cpu/regfile0/SS[0]                    |               10 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_5[0]                  | cpu/regfile0/SS[0]                    |                7 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_1[0]                  | cpu/regfile0/SS[0]                    |               20 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_6[0]                  | cpu/regfile0/SS[0]                    |                8 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_3[0]                  | cpu/regfile0/SS[0]                    |                8 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[3]_0[0]                  | cpu/regfile0/SS[0]                    |               14 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[3]_1[0]                  | cpu/regfile0/SS[0]                    |               12 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_10[0]                 | cpu/regfile0/SS[0]                    |               13 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_7[0]                  | cpu/regfile0/SS[0]                    |               19 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[1]_2[0]                  | cpu/regfile0/SS[0]                    |               23 |             32 |
+|  sys_clk_25M_IBUF_BUFG              | cpu/memwb_reg0/wb_wa_reg[4]_7[0]                  | cpu/regfile0/SS[0]                    |               28 |             32 |
+|  sys_clk_25M_IBUF_BUFG              |                                                   |                                       |               12 |             33 |
+|  r_dce0_BUFG                        |                                                   |                                       |               16 |             47 |
+|  sys_clk_25M_IBUF_BUFG              |                                                   | cpu/idexe_reg0/exe_alutype[2]_i_1_n_0 |               38 |            112 |
+|  sys_clk_25M_IBUF_BUFG              |                                                   | cpu/regfile0/SS[0]                    |               59 |            196 |
++-------------------------------------+---------------------------------------------------+---------------------------------------+------------------+----------------+
 
 

@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Wed Dec 25 20:14:22 2024
+| Date         : Wed Dec 25 22:15:04 2024
 | Host         : Legion-Singer running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -max_paths 10 -file MiniMIPS32_Lite_FullSyS_timing_summary_routed.rpt -pb MiniMIPS32_Lite_FullSyS_timing_summary_routed.pb -rpx MiniMIPS32_Lite_FullSyS_timing_summary_routed.rpx -warn_on_violation
 | Design       : MiniMIPS32_Lite_FullSyS
@@ -54,7 +54,7 @@ Table of Contents
 
 1. checking no_clock
 --------------------
- There are 1419 register/latch pins with no clock driven by root clock pin: sys_clk_25M (HIGH)
+ There are 1526 register/latch pins with no clock driven by root clock pin: sys_clk_25M (HIGH)
 
  There are 62 register/latch pins with no clock driven by root clock pin: cpu/exemem_reg0/mem_aluop_reg[0]/Q (HIGH)
 
@@ -144,6 +144,8 @@ Table of Contents
 
  There are 32 register/latch pins with no clock driven by root clock pin: cpu/memwb_reg0/wb_dreg_reg[29]/Q (HIGH)
 
+ There are 32 register/latch pins with no clock driven by root clock pin: cpu/memwb_reg0/wb_dreg_reg[2]/Q (HIGH)
+
  There are 32 register/latch pins with no clock driven by root clock pin: cpu/memwb_reg0/wb_dreg_reg[30]/Q (HIGH)
 
  There are 32 register/latch pins with no clock driven by root clock pin: cpu/memwb_reg0/wb_dreg_reg[31]/Q (HIGH)
@@ -185,21 +187,21 @@ Table of Contents
 
 4. checking unconstrained_internal_endpoints
 --------------------------------------------
- There are 4064 pins that are not constrained for maximum delay. (HIGH)
+ There are 4313 pins that are not constrained for maximum delay. (HIGH)
 
  There are 0 pins that are not constrained for maximum delay due to constant clock.
 
 
 5. checking no_input_delay
 --------------------------
- There are 2 input ports with no input delay specified. (HIGH)
+ There are 10 input ports with no input delay specified. (HIGH)
 
  There are 0 input ports with no input delay but user has a false path constraint.
 
 
 6. checking no_output_delay
 ---------------------------
- There is 1 port with no output delay specified. (HIGH)
+ There are 23 ports with no output delay specified. (HIGH)
 
  There are 0 ports with no output delay but user has a false path constraint
 

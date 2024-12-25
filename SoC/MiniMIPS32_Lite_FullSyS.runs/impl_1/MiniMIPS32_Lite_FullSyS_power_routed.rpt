@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date             : Wed Dec 25 20:14:22 2024
+| Date             : Wed Dec 25 22:15:04 2024
 | Host             : Legion-Singer running 64-bit major release  (build 9200)
 | Command          : report_power -file MiniMIPS32_Lite_FullSyS_power_routed.rpt -pb MiniMIPS32_Lite_FullSyS_power_summary_routed.pb -rpx MiniMIPS32_Lite_FullSyS_power_routed.rpx
 | Design           : MiniMIPS32_Lite_FullSyS
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+----------------------------------+
-| Total On-Chip Power (W)  | 13.071 (Junction temp exceeded!) |
+| Total On-Chip Power (W)  | 13.649 (Junction temp exceeded!) |
 | Design Power Budget (W)  | Unspecified*                     |
 | Power Budget Margin (W)  | NA                               |
-| Dynamic (W)              | 12.882                           |
-| Device Static (W)        | 0.189                            |
+| Dynamic (W)              | 13.446                           |
+| Device Static (W)        | 0.203                            |
 | Effective TJA (C/W)      | 4.9                              |
-| Max Ambient (C)          | 21.5                             |
-| Junction Temperature (C) | 88.5                             |
+| Max Ambient (C)          | 18.7                             |
+| Junction Temperature (C) | 91.3                             |
 | Confidence Level         | Low                              |
 | Setting File             | ---                              |
 | Simulation Activity File | ---                              |
@@ -52,18 +52,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |     5.125 |     3714 |       --- |             --- |
-|   LUT as Logic |     4.935 |     1616 |     20800 |            7.77 |
-|   CARRY4       |     0.125 |       48 |      8150 |            0.59 |
-|   Register     |     0.060 |     1507 |     41600 |            3.62 |
+| Slice Logic    |     5.545 |     3949 |       --- |             --- |
+|   LUT as Logic |     5.312 |     1693 |     20800 |            8.14 |
+|   CARRY4       |     0.146 |       58 |      8150 |            0.71 |
+|   Register     |     0.081 |     1614 |     41600 |            3.88 |
 |   BUFG         |     0.006 |        3 |        32 |            9.38 |
 |   F7/F8 Muxes  |    <0.001 |      384 |     32600 |            1.18 |
-|   Others       |     0.000 |       35 |       --- |             --- |
-| Signals        |     7.033 |     2915 |       --- |             --- |
-| Block RAM      |     0.716 |        6 |        50 |           12.00 |
-| I/O            |     0.008 |       36 |       170 |           21.18 |
-| Static Power   |     0.189 |          |           |                 |
-| Total          |    13.071 |          |           |                 |
+|   Others       |     0.000 |       41 |       --- |             --- |
+| Signals        |     7.143 |     3134 |       --- |             --- |
+| Block RAM      |     0.718 |        6 |        50 |           12.00 |
+| I/O            |     0.040 |       44 |       170 |           25.88 |
+| Static Power   |     0.203 |          |           |                 |
+| Total          |    13.649 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,8 +73,8 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |    12.928 |      12.821 |      0.107 |
-| Vccaux    |       1.800 |     0.024 |       0.000 |      0.024 |
+| Vccint    |       1.000 |    13.503 |      13.385 |      0.118 |
+| Vccaux    |       1.800 |     0.025 |       0.000 |      0.025 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
@@ -82,7 +82,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.064 |       0.061 |      0.003 |
+| Vccbram   |       1.000 |     0.065 |       0.061 |      0.004 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |
@@ -140,27 +140,32 @@ Table of Contents
 +-------------------------+-----------+
 | Name                    | Power (W) |
 +-------------------------+-----------+
-| MiniMIPS32_Lite_FullSyS |    12.882 |
-|   cpu                   |     6.765 |
-|     exemem_reg0         |     0.748 |
-|     idexe_reg0          |     1.776 |
-|     if_stage0           |     0.185 |
-|     ifid_reg0           |     0.496 |
-|     memwb_reg0          |     0.893 |
-|     regfile0            |     2.668 |
-|   data_ram0             |     0.229 |
-|     U0                  |     0.229 |
-|       inst_blk_mem_gen  |     0.229 |
-|   ext_uart_r            |     0.202 |
-|     tickgen             |     0.175 |
-|   ext_uart_t            |     0.026 |
-|     tickgen             |     0.026 |
-|   inst_rom0             |     5.269 |
-|     U0                  |     5.269 |
-|       inst_blk_mem_gen  |     5.269 |
-|   inst_rom1             |     0.230 |
-|     U0                  |     0.230 |
-|       inst_blk_mem_gen  |     0.230 |
+| MiniMIPS32_Lite_FullSyS |    13.446 |
+|   btnA                  |     0.030 |
+|   cpu                   |     6.880 |
+|     exemem_reg0         |     0.849 |
+|     idexe_reg0          |     1.739 |
+|     if_stage0           |     0.192 |
+|     ifid_reg0           |     0.492 |
+|     memwb_reg0          |     0.837 |
+|     regfile0            |     2.770 |
+|   data_ram0             |     0.235 |
+|     U0                  |     0.235 |
+|       inst_blk_mem_gen  |     0.235 |
+|   ext_uart_r            |     0.206 |
+|     tickgen             |     0.170 |
+|   ext_uart_t            |     0.025 |
+|     tickgen             |     0.025 |
+|   inst_rom0             |     5.177 |
+|     U0                  |     5.177 |
+|       inst_blk_mem_gen  |     5.177 |
+|   inst_rom1             |     0.238 |
+|     U0                  |     0.238 |
+|       inst_blk_mem_gen  |     0.238 |
+|   segH                  |     0.213 |
+|     U0                  |     0.213 |
+|   segL                  |     0.198 |
+|     U0                  |     0.198 |
 +-------------------------+-----------+
 
 

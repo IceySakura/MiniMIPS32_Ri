@@ -151,6 +151,70 @@ module MiniMIPS32_Lite_FullSyS(
         end
     end
     
+    // 矩阵键盘逻辑
+    logic [3 : 0] btn_num, btn_num_buffer, btn_num_buffer_last;
+    btn_array btnA(.btn_rc(btn_rc), .btn_num(btn_num));
+
+    // 记忆相邻两次的按键值
+    always_ff @(posedge clk_out) begin
+        if (~rst_n) begin
+            btn_num_buffer <= 0;
+            btn_num_buffer_last <= 0;
+        end
+        else begin
+            btn_num_buffer_last <= btn_num_buffer;
+            btn_num_buffer <= btn_num;
+        end
+    end
+
+    //  矩阵键盘缓冲区
+    logic [3:0] give_cpu_btn_num;
+    logic give_cpu_avi;
+    always_ff @(posedge clk_out) begin
+        if(btn_num_buffer_last != btn_num_buffer && btn_num_buffer != 4'b0000) begin
+            give_cpu_btn_num <= btn_num_buffer;
+            give_cpu_avi <= 1;
+        end
+        else if(~rst_n || (last_daddr == 32'hbfd003f0 && last_dwe == 4'b0000 && last_dce)) begin
+            give_cpu_btn_num <= 4'b0000;
+            give_cpu_avi <= 0;
+        end
+    end
+
+    // 数码管逻辑
+    logic [15 : 0] numberH, numberL;
+    x7seg segH(
+        .sys_clk(clk_out), 
+        .sys_rst_n(rst_n), 
+        .iDIGL(numberH[7 : 0]), 
+        .iDIGH(numberH[15 : 8]), 
+        .an(anH), 
+        .a_to_g(a_to_gH)
+    );
+    
+    x7seg segL(
+        .sys_clk(clk_out), 
+        .sys_rst_n(rst_n), 
+        .iDIGL(numberL[7 : 0]), 
+        .iDIGH(numberL[15 : 8]), 
+        .an(anL), 
+        .a_to_g(a_to_gL)
+    );
+
+    always_ff @(posedge clk_out) begin
+        if(~rst_n) begin
+            numberH <= 16'h0000;
+            numberL <= 16'h0000;
+        end
+        else if(daddr == 32'hbfd00370 && dwe != 4'b0000 && dce) begin
+            numberH <= {din[7:0], din[15:8]};
+            numberL <= {din[23:16], din[31:24]};
+        end
+        else begin
+            numberH <= numberH;
+            numberL <= numberL;
+        end
+    end
 
     // 组合逻辑
     always_comb begin
@@ -191,12 +255,24 @@ module MiniMIPS32_Lite_FullSyS(
         if(last_daddr == 32'hbfd003f8 && last_dwe == 4'b0000 && last_dce) begin
             dout = {ext_uart_buffer_rx, 24'b0};
         end
-
         // 组合逻辑的读串口 status
         if(last_daddr == 32'hbfd003fc && last_dwe == 4'b0000 && last_dce) begin
             dout = {6'b0 , ext_uart_avai_rx ,ext_uart_avai_tx , 24'b0};
         end
+
+        // 组合逻辑的读键盘 buffer
+        if(last_daddr == 32'hbfd003f4 && last_dwe == 4'b0000 && last_dce)begin
+            dout = {7'b0, give_cpu_avi, 24'b0};
+        end
+        // 组合逻辑的读键盘 status
+        if(last_daddr == 32'hbfd003f0 && last_dwe == 4'b0000 && last_dce)begin
+            dout = {4'b0, give_cpu_btn_num, 24'b0};
+        end
     end
+
+
+    
+    
 
    
     

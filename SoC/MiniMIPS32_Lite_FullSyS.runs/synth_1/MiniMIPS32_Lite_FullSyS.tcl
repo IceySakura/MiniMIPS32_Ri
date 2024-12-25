@@ -35,8 +35,11 @@ set_property ip_cache_permissions {read write} [current_project]
 add_files E:/Labs/COAProj/MiniMIPS32_Ri/SoC/data_ram_20.coe
 add_files E:/Labs/COAProj/MiniMIPS32_Ri/SoC/inst_rom.coe
 add_files E:/Labs/COAProj/MiniMIPS32_Ri/SoC/serial_inst.coe
+add_files e:/Labs/COAProj/MiniMIPS32_Ri/SoC/btn_inst.coe
 read_verilog -library xil_defaultlib -sv {
   E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/btn_array.sv
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv
   E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv
 }
 read_verilog -library xil_defaultlib {
@@ -53,11 +56,11 @@ read_verilog -library xil_defaultlib {
   E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/regfile.v
   E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/wb_stage.v
 }
-read_ip -quiet E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom.xci
-set_property used_in_implementation false [get_files -all e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom_ooc.xdc]
-
 read_ip -quiet E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/data_ram/data_ram.xci
 set_property used_in_implementation false [get_files -all e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/data_ram/data_ram_ooc.xdc]
+
+read_ip -quiet E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom.xci
+set_property used_in_implementation false [get_files -all e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -70,8 +73,6 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc
 set_property used_in_implementation false [get_files E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]
 
-read_xdc dont_touch.xdc
-set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 

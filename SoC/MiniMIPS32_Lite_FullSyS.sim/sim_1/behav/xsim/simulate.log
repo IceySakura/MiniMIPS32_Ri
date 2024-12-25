@@ -9,23 +9,13 @@ Block Memory Generator module sys_tb.SoC.inst_rom1.inst.native_mem_module.blk_me
  Block Memory Generator module loading initial data...
  Block Memory Generator data initialization complete.
 Block Memory Generator module sys_tb.SoC.data_ram0.inst.native_mem_module.blk_mem_gen_v8_4_4_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
-Captured Byte: 0x46 F
-Captured Byte: 0x69 i
-Captured Byte: 0x62 b
-Captured Byte: 0x20  
-Captured Byte: 0x46 F
-Captured Byte: 0x69 i
-Captured Byte: 0x6e n
-Captured Byte: 0x69 i
-Captured Byte: 0x73 s
-Captured Byte: 0x68 h
-Captured Byte: 0x2e .
-Captured Byte: 0x41 A
-Captured Byte: 0x6c l
-Captured Byte: 0x6c l
-Captured Byte: 0x20  
-Captured Byte: 0x50 P
-Captured Byte: 0x41 A
-Captured Byte: 0x53 S
-Captured Byte: 0x53 S
-Captured Byte: 0x21 !
+Test Case 1: btn_rc = 10001000, Expected btn_num = F
+Captured Byte: 0x0f 
+Test Case 2: btn_rc = 00100100, Expected btn_num = 6
+Captured Byte: 0x06 
+Test Case 3: btn_rc = 00010010, Expected btn_num = 1
+Captured Byte: 0x01 
+Test Case 4: btn_rc = 01000001, Expected btn_num = 8
+Captured Byte: 0x08 
+Test Case 5: btn_rc = 00000000, Expected btn_num = 0
+$stop called at time : 6 us : File "E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sim_1/new/sys_tb.v" Line 166
