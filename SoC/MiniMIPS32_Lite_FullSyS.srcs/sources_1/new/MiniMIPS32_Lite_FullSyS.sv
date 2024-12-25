@@ -1,3 +1,4 @@
+`include "defines.v"
 `timescale 1ns / 1ps
 
 module MiniMIPS32_Lite_FullSyS(
@@ -15,69 +16,103 @@ module MiniMIPS32_Lite_FullSyS(
     output logic [7 : 0]    leds                // LED灯输出端
     );
     
-    logic locked, clk_out, rst_n;
+    logic clk_out, rst_n;
+    assign clk_out = sys_clk_25M;
+    assign rst_n = sys_rst_n;
     
-    logic [15 : 0] numberH, numberL;
-    logic [ 3 : 0] btn_num, btn_num_buffer;
-    logic [ 7 : 0] dip_sw_bits;
     
-     clk_sync clk_sync0
-   (
-    .clk_out(clk_out),     
-    .resetn(sys_rst_n), 
-    .locked(locked),       
-    .clk_in(sys_clk_25M));
-    
-    // 将locked信号转为后级电路的复位信号rst_n
-    always_ff @(posedge clk_out or negedge locked) begin
-        if(~locked) rst_n = 1'b0; 
-        else        rst_n = 1'b1;
-    end
-    
-    // 注意：如下代码仅为拨动开关演示示例，请根据设计要求自行修改
-    always_ff @(posedge clk_out or negedge rst_n) begin
-        if (~rst_n) dip_sw_bits <= 0;
-        else dip_sw_bits <= dip_sw; 
-    end
-    
-    // 注意：如下代码仅为键盘阵列演示示例，请根据设计要求自行修改
-    btn_array btnA(.btn_rc(btn_rc), .btn_num(btn_num));
-    
-    always_ff @(posedge clk_out or negedge rst_n) begin
-        if (~rst_n) btn_num_buffer <= 0;
-        else btn_num_buffer <= btn_num; 
-    end
-    
-    // 注意：如下代码仅为LED灯演示示例，请根据设计要求自行修改
-    assign leds = dip_sw_bits;
-    
-     // 注意：如下代码仅为7端数码管演示示例，请根据设计要求自行修改
-    x7seg segH(
-        .sys_clk(clk_out), 
-        .sys_rst_n(rst_n), 
-        .iDIGL(numberH[7 : 0]), 
-        .iDIGH(numberH[15 : 8]), 
-        .an(anH), 
-        .a_to_g(a_to_gH)
-    );
-    
-    x7seg segL(
-        .sys_clk(clk_out), 
-        .sys_rst_n(rst_n), 
-        .iDIGL(numberL[7 : 0]), 
-        .iDIGH(numberL[15 : 8]), 
-        .an(anL), 
-        .a_to_g(a_to_gL)
-    );
-    assign numberH = {2{ext_uart_buffer}};
-    assign numberL = {4{btn_num_buffer}};
-    
-    // 如下代码仅为直连串口接收发送演示示例（即从直连串口收到的数据再发送回串口），请根据设计要求自行修改
-    logic [7:0] ext_uart_rx;
-    logic [7:0] ext_uart_buffer, ext_uart_tx;
-    logic ext_uart_ready, ext_uart_clear, ext_uart_busy;
-    logic ext_uart_start, ext_uart_avai;
 
+    // inst_rom
+    logic [`INST_ADDR_BUS] iaddr;
+    logic                  ice;
+    logic [`INST_BUS]      inst;
+    // data_ram
+    logic                  dce;
+    logic [3 : 0]          dwe;
+    logic [`WORD_BUS]      daddr;
+    logic [`WORD_BUS]      din;
+    logic [`WORD_BUS]      dout;
+    // debug
+    logic [`INST_ADDR_BUS]  debug_wb_pc;   
+    logic                   debug_wb_rf_wen;
+    logic [`REG_ADDR_BUS  ] debug_wb_rf_wnum;
+    logic [`WORD_BUS      ] debug_wb_rf_wdata;
+    MiniMIPS32 cpu(
+        .cpu_clk_50M(clk_out),
+        .cpu_rst_n(rst_n),
+
+        .iaddr(iaddr),
+        .ice(ice),
+        .inst(inst),
+
+        .dce(dce),
+        .dwe(dwe),
+        .daddr(daddr),
+        .din(din),
+        .dout(dout),
+
+        .debug_wb_pc(debug_wb_pc),       // 供调试使用的PC值，上板测试时务必删除该信号
+        .debug_wb_rf_wen(debug_wb_rf_wen),   // 供调试使用的PC值，上板测试时务必删除该信号
+        .debug_wb_rf_wnum(debug_wb_rf_wnum),  // 供调试使用的PC值，上板测试时务必删除该信号
+        .debug_wb_rf_wdata(debug_wb_rf_wdata)  // 供调试使用的PC值，上板测试时务必删除该信号
+    );
+
+    // inst_rom
+    inst_rom inst_rom0(
+        .clka(clk_out),
+        .addra(iaddr[12:2]),
+        .ena(ice),
+        .douta(inst)
+    );
+
+    // inst_rom for mem
+    logic                  r_ice;
+    logic [`WORD_BUS]      r_iaddr;
+    logic [`WORD_BUS]      r_inst;
+    inst_rom inst_rom1(
+        .clka(clk_out),
+        .addra(r_iaddr[12:2]),
+        .ena(r_ice),
+        .douta(r_inst)
+    );
+
+    // data_ram
+    logic                  r_dce;
+    logic [3 : 0]          r_dwe;
+    logic [`WORD_BUS]      r_daddr;
+    logic [`WORD_BUS]      r_din;
+    logic [`WORD_BUS]      r_dout;
+    data_ram data_ram0(
+        .clka(clk_out),
+        .ena(r_dce),
+        .wea(r_dwe),
+        .addra(r_daddr[12:2]),
+        .dina(r_din),
+        .douta(r_dout)
+    );
+
+    // 记忆上一次的 daddr
+    logic             last_dce;
+    logic [3 : 0]     last_dwe;
+    logic [`WORD_BUS] last_daddr;
+    always_ff @(posedge clk_out) begin
+        if (~rst_n) begin
+            last_dce <= 0;
+            last_dwe <= 4'b0000;
+            last_daddr <= 0;
+        end
+        else begin
+            last_dce <= dce;
+            last_dwe <= dwe;
+            last_daddr <= daddr;
+        end
+    end
+
+    // UART
+    logic [7:0] ext_uart_rx, ext_uart_tx;
+    logic [7:0] ext_uart_buffer_rx, ext_uart_buffer_tx;
+    logic ext_uart_ready, ext_uart_clear, ext_uart_busy, ext_uart_start;
+    logic ext_uart_avai_rx, ext_uart_avai_tx;
     async_receiver #(.ClkFrequency(25000000),.Baud(9600)) //接收模块，9600无检验位
     ext_uart_r(
         .clk(clk_out),                       //外部时钟信号
@@ -86,25 +121,6 @@ module MiniMIPS32_Lite_FullSyS(
         .RxD_clear(ext_uart_clear),       //清除接收标志
         .RxD_data(ext_uart_rx)             //接收到的一字节数据
     );
-
-    assign ext_uart_clear = ext_uart_ready; //收到数据的同时，清除标志，因为数据已取到ext_uart_buffer中
-    always @(posedge clk_out) begin //接收到缓冲区ext_uart_buffer
-        if(ext_uart_ready)begin
-            ext_uart_buffer <= ext_uart_rx;
-            ext_uart_avai <= 1;
-        end else if(!ext_uart_busy && ext_uart_avai)begin 
-            ext_uart_avai <= 0;
-        end
-    end
-    always @(posedge clk_out) begin //将缓冲区ext_uart_buffer发送出去
-        if(!ext_uart_busy && ext_uart_avai)begin 
-            ext_uart_tx <= ext_uart_buffer;
-            ext_uart_start <= 1;
-        end else begin 
-            ext_uart_start <= 0;
-        end
-    end
-
     async_transmitter #(.ClkFrequency(25000000),.Baud(9600)) //发送模块，9600无检验位
     ext_uart_t(
         .clk(clk_out),                  //外部时钟信号
@@ -113,5 +129,79 @@ module MiniMIPS32_Lite_FullSyS(
         .TxD_start(ext_uart_start),    //开始发送信号
         .TxD_data(ext_uart_tx)        //待发送的数据
     );
+    assign ext_uart_clear = ext_uart_ready; //收到数据的同时，清除标志，因为数据已取到ext_uart_buffer中
+    always @(posedge clk_out) begin // 读的状态机
+        if(ext_uart_ready) begin
+            ext_uart_buffer_rx <= ext_uart_rx;
+            ext_uart_avai_rx <= 1;
+        end
+        else if(~rst_n || (last_daddr == 32'hbfd003f8 && last_dwe == 4'b0000 && last_dce)) begin
+            ext_uart_buffer_rx <= 8'h00;
+            ext_uart_avai_rx <= 0;
+        end
+    end
+    always @(posedge clk_out) begin // 写的状态机
+        if(daddr == 32'hbfd003f8 && dwe != 4'b0000 && dce) begin
+            ext_uart_buffer_tx <= din[7:0];
+            ext_uart_avai_tx <= 0;
+        end
+        else if(~rst_n || (~ext_uart_busy && ~ext_uart_avai_tx)) begin
+            ext_uart_buffer_tx <= 8'h00;
+            ext_uart_avai_tx <= 1;
+        end
+    end
+    
+
+    // 组合逻辑
+    always_comb begin
+        // .data get
+        if(daddr[31:16] == 16'h8040 && dce) begin
+            r_dce = dce;
+            r_dwe = dwe;
+            r_daddr = daddr;
+            r_din = din;
+        end
+        // .text get
+        if(daddr[31:16] == 16'h8000 && dce) begin
+            r_ice = dce;
+            r_iaddr = daddr;
+        end
+
+        // .data give
+        if(last_daddr[31:16] == 16'h8040 && last_dwe == 4'b0000 && last_dce) begin
+            dout = r_dout;
+        end
+        // .text give
+        if(last_daddr[31:16] == 16'h8000 && last_dwe == 4'b0000 && last_dce) begin
+            dout = r_inst;
+        end
+
+
+        // 组合逻辑的写串口 buffer
+        if(~ext_uart_busy && ~ext_uart_avai_tx) begin
+            ext_uart_tx = ext_uart_buffer_tx;
+            ext_uart_start = 1;
+        end
+        else begin
+            ext_uart_tx = 8'h00;
+            ext_uart_start = 0;
+        end            
+
+        // 组合逻辑的读串口 buffer
+        if(last_daddr == 32'hbfd003f8 && last_dwe == 4'b0000 && last_dce) begin
+            dout = {ext_uart_buffer_rx, 24'b0};
+        end
+
+        // 组合逻辑的读串口 status
+        if(last_daddr == 32'hbfd003fc && last_dwe == 4'b0000 && last_dce) begin
+            dout = {6'b0 , ext_uart_avai_rx ,ext_uart_avai_tx , 24'b0};
+        end
+    end
+
+   
+    
+    
+    
+    
     
 endmodule

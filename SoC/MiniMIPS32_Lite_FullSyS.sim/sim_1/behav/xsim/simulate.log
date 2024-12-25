@@ -1,0 +1,31 @@
+Vivado Simulator 2019.2
+Time resolution is 1 ps
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module sys_tb.SoC.inst_rom0.inst.native_mem_module.blk_mem_gen_v8_4_4_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module sys_tb.SoC.inst_rom1.inst.native_mem_module.blk_mem_gen_v8_4_4_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module sys_tb.SoC.data_ram0.inst.native_mem_module.blk_mem_gen_v8_4_4_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Captured Byte: 0x46 F
+Captured Byte: 0x69 i
+Captured Byte: 0x62 b
+Captured Byte: 0x20  
+Captured Byte: 0x46 F
+Captured Byte: 0x69 i
+Captured Byte: 0x6e n
+Captured Byte: 0x69 i
+Captured Byte: 0x73 s
+Captured Byte: 0x68 h
+Captured Byte: 0x2e .
+Captured Byte: 0x41 A
+Captured Byte: 0x6c l
+Captured Byte: 0x6c l
+Captured Byte: 0x20  
+Captured Byte: 0x50 P
+Captured Byte: 0x41 A
+Captured Byte: 0x53 S
+Captured Byte: 0x53 S
+Captured Byte: 0x21 !

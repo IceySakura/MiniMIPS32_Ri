@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc rfile:../../../MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc rfile:../../../MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:3 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN F5 [get_ports sys_clk_25M]
 set_property src_info {type:XDC file:1 line:4 export:INPUT save:INPUT read:READ} [current_design]

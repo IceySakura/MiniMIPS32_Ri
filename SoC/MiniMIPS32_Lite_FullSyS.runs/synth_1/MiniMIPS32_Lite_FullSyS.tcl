@@ -17,30 +17,47 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param chipscope.maxJobs 1
+set_param chipscope.maxJobs 3
+set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a35tftg256-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
-set_property webtalk.parent_dir D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.cache/wt [current_project]
-set_property parent.project_path D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.xpr [current_project]
-set_property XPM_LIBRARIES XPM_CDC [current_project]
+set_property webtalk.parent_dir E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.cache/wt [current_project]
+set_property parent.project_path E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.xpr [current_project]
+set_property XPM_LIBRARIES XPM_MEMORY [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.cache/ip [current_project]
+set_property ip_output_repo e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
+add_files E:/Labs/COAProj/MiniMIPS32_Ri/SoC/data_ram_20.coe
+add_files E:/Labs/COAProj/MiniMIPS32_Ri/SoC/inst_rom.coe
+add_files E:/Labs/COAProj/MiniMIPS32_Ri/SoC/serial_inst.coe
 read_verilog -library xil_defaultlib -sv {
-  D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv
-  D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/btn_array.sv
-  D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv
-  D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv
 }
-read_ip -quiet d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync/clk_sync.xci
-set_property used_in_implementation false [get_files -all d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync/clk_sync_board.xdc]
-set_property used_in_implementation false [get_files -all d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync/clk_sync.xdc]
-set_property used_in_implementation false [get_files -all d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync/clk_sync_ooc.xdc]
+read_verilog -library xil_defaultlib {
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/defines.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/exe_stage.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/exemem_reg.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/id_stage.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/idexe_reg.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/if_stage.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/ifid_reg.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/mem_stage.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/memwb_reg.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/regfile.v
+  E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/wb_stage.v
+}
+read_ip -quiet E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom.xci
+set_property used_in_implementation false [get_files -all e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom_ooc.xdc]
+
+read_ip -quiet E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/data_ram/data_ram.xci
+set_property used_in_implementation false [get_files -all e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/data_ram/data_ram_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -50,9 +67,11 @@ set_property used_in_implementation false [get_files -all d:/Work/vivado_project
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc
-set_property used_in_implementation false [get_files D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]
+read_xdc E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc
+set_property used_in_implementation false [get_files E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]
 
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 

@@ -1,8 +1,8 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Tue Sep  5 14:49:50 2023
-| Host         : LAPTOP-BEASOA6F running 64-bit major release  (build 9200)
+| Date         : Wed Dec 25 20:14:20 2024
+| Host         : Legion-Singer running 64-bit major release  (build 9200)
 | Command      : report_drc -file MiniMIPS32_Lite_FullSyS_drc_routed.rpt -pb MiniMIPS32_Lite_FullSyS_drc_routed.pb -rpx MiniMIPS32_Lite_FullSyS_drc_routed.rpx
 | Design       : MiniMIPS32_Lite_FullSyS
 | Device       : xc7a35tftg256-1
@@ -24,11 +24,12 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 1
+             Violations found: 3
 +----------+----------+-----------------------------------------------------+------------+
 | Rule     | Severity | Description                                         | Violations |
 +----------+----------+-----------------------------------------------------+------------+
 | CFGBVS-1 | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1          |
+| PDRC-153 | Warning  | Gated clock check                                   | 2          |
 +----------+----------+-----------------------------------------------------+------------+
 
 2. REPORT DETAILS
@@ -44,6 +45,16 @@ Neither the CFGBVS nor CONFIG_VOLTAGE voltage property is set in the current_des
  #where value2 is the voltage provided to configuration bank 0
 
 Refer to the device configuration user guide for more information.
+Related violations: <none>
+
+PDRC-153#1 Warning
+Gated clock check  
+Net cpu/exemem_reg0/E[0] is a gated clock net sourced by a combinational pin cpu/exemem_reg0/r_iaddr_reg[12]_i_1/O, cell cpu/exemem_reg0/r_iaddr_reg[12]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#2 Warning
+Gated clock check  
+Net cpu/exemem_reg0/mem_aluop_reg[2]_0 is a gated clock net sourced by a combinational pin cpu/exemem_reg0/mem_dre_o_reg[3]_i_2/O, cell cpu/exemem_reg0/mem_dre_o_reg[3]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 

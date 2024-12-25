@@ -15,81 +15,129 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 2180 
-WARNING: [Synth 8-6901] identifier 'ext_uart_buffer' is used before its declaration [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:72]
+INFO: Helper process launched with PID 5280 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 814.273 ; gain = 239.168
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 807.836 ; gain = 233.516
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'MiniMIPS32_Lite_FullSyS' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:3]
-INFO: [Synth 8-6157] synthesizing module 'clk_sync' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.runs/synth_1/.Xil/Vivado-13208-LAPTOP-BEASOA6F/realtime/clk_sync_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'clk_sync' (1#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.runs/synth_1/.Xil/Vivado-13208-LAPTOP-BEASOA6F/realtime/clk_sync_stub.v:5]
-INFO: [Synth 8-6157] synthesizing module 'btn_array' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/btn_array.sv:23]
-INFO: [Synth 8-6155] done synthesizing module 'btn_array' (2#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/btn_array.sv:23]
-INFO: [Synth 8-6157] synthesizing module 'x7seg' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:146]
-INFO: [Synth 8-6157] synthesizing module 'clken' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:107]
-	Parameter SYS_CLK_FREQ bound to: 25000000 - type: integer 
-	Parameter TARGET_CLK_FREQ bound to: 1000 - type: integer 
-	Parameter N bound to: 20 - type: integer 
-	Parameter CNT_MAX bound to: 25000 - type: integer 
-WARNING: [Synth 8-5788] Register clk_flag_reg in module clken is has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:136]
-INFO: [Synth 8-6155] done synthesizing module 'clken' (3#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:107]
-INFO: [Synth 8-6157] synthesizing module 'x7seg_scan' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:3]
-	Parameter STUBNUM bound to: 4 - type: integer 
-	Parameter AN0 bound to: 4'b0001 
-	Parameter AN1 bound to: 4'b0010 
-	Parameter AN2 bound to: 4'b0100 
-	Parameter AN3 bound to: 4'b1000 
-INFO: [Synth 8-6155] done synthesizing module 'x7seg_scan' (4#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:3]
-INFO: [Synth 8-6157] synthesizing module 'x7seg_dec' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:58]
-	Parameter NUM0 bound to: 8'b11000000 
-	Parameter NUM1 bound to: 8'b11111001 
-	Parameter NUM2 bound to: 8'b10100100 
-	Parameter NUM3 bound to: 8'b10110000 
-	Parameter NUM4 bound to: 8'b10011001 
-	Parameter NUM5 bound to: 8'b10010010 
-	Parameter NUM6 bound to: 8'b10000010 
-	Parameter NUM7 bound to: 8'b11111000 
-	Parameter NUM8 bound to: 8'b10000000 
-	Parameter NUM9 bound to: 8'b10010000 
-	Parameter NUMA bound to: 8'b10001000 
-	Parameter NUMB bound to: 8'b10000011 
-	Parameter NUMC bound to: 8'b11000110 
-	Parameter NUMD bound to: 8'b10100001 
-	Parameter NUME bound to: 8'b10000110 
-	Parameter NUMF bound to: 8'b10001110 
-INFO: [Synth 8-6155] done synthesizing module 'x7seg_dec' (5#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:58]
-INFO: [Synth 8-6155] done synthesizing module 'x7seg' (6#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/x7seg.sv:146]
-INFO: [Synth 8-6157] synthesizing module 'async_receiver' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:75]
+INFO: [Synth 8-6157] synthesizing module 'MiniMIPS32_Lite_FullSyS' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'MiniMIPS32' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32.v:3]
+INFO: [Synth 8-6157] synthesizing module 'if_stage' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/if_stage.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'if_stage' (1#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/if_stage.v:3]
+INFO: [Synth 8-6157] synthesizing module 'ifid_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/ifid_reg.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'ifid_reg' (2#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/ifid_reg.v:3]
+INFO: [Synth 8-6157] synthesizing module 'id_stage' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/id_stage.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'id_stage' (3#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/id_stage.v:3]
+INFO: [Synth 8-6157] synthesizing module 'regfile' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/regfile.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (4#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/regfile.v:3]
+INFO: [Synth 8-6157] synthesizing module 'idexe_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/idexe_reg.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'idexe_reg' (5#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/idexe_reg.v:3]
+INFO: [Synth 8-6157] synthesizing module 'exe_stage' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/exe_stage.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'exe_stage' (6#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/exe_stage.v:3]
+INFO: [Synth 8-6157] synthesizing module 'exemem_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/exemem_reg.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'exemem_reg' (7#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/exemem_reg.v:3]
+INFO: [Synth 8-6157] synthesizing module 'mem_stage' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/mem_stage.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'mem_stage' (8#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/mem_stage.v:3]
+INFO: [Synth 8-6157] synthesizing module 'memwb_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/memwb_reg.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'memwb_reg' (9#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/memwb_reg.v:3]
+INFO: [Synth 8-6157] synthesizing module 'wb_stage' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/wb_stage.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'wb_stage' (10#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/wb_stage.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'MiniMIPS32' (11#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32.v:3]
+INFO: [Synth 8-6157] synthesizing module 'inst_rom' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.runs/synth_1/.Xil/Vivado-11144-Legion-Singer/realtime/inst_rom_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'inst_rom' (12#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.runs/synth_1/.Xil/Vivado-11144-Legion-Singer/realtime/inst_rom_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'data_ram' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.runs/synth_1/.Xil/Vivado-11144-Legion-Singer/realtime/data_ram_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'data_ram' (13#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.runs/synth_1/.Xil/Vivado-11144-Legion-Singer/realtime/data_ram_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'async_receiver' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:75]
 	Parameter ClkFrequency bound to: 25000000 - type: integer 
 	Parameter Baud bound to: 9600 - type: integer 
 	Parameter Oversampling bound to: 8 - type: integer 
 	Parameter l2o bound to: 4 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'BaudTickGen' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:184]
+INFO: [Synth 8-6157] synthesizing module 'BaudTickGen' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:184]
 	Parameter ClkFrequency bound to: 25000000 - type: integer 
 	Parameter Baud bound to: 9600 - type: integer 
 	Parameter Oversampling bound to: 8 - type: integer 
 	Parameter AccWidth bound to: 20 - type: integer 
 	Parameter ShiftLimiter bound to: 6 - type: integer 
 	Parameter Inc bound to: 3221 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'BaudTickGen' (7#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:184]
-WARNING: [Synth 8-6014] Unused sequential element GapCnt_reg was removed.  [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:176]
-WARNING: [Synth 8-6014] Unused sequential element RxD_endofpacket_reg was removed.  [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:178]
-INFO: [Synth 8-6155] done synthesizing module 'async_receiver' (8#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:75]
-INFO: [Synth 8-6157] synthesizing module 'async_transmitter' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:14]
+INFO: [Synth 8-6155] done synthesizing module 'BaudTickGen' (14#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:184]
+WARNING: [Synth 8-6014] Unused sequential element GapCnt_reg was removed.  [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:176]
+WARNING: [Synth 8-6014] Unused sequential element RxD_endofpacket_reg was removed.  [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:178]
+INFO: [Synth 8-6155] done synthesizing module 'async_receiver' (15#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:75]
+INFO: [Synth 8-6157] synthesizing module 'async_transmitter' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:14]
 	Parameter ClkFrequency bound to: 25000000 - type: integer 
 	Parameter Baud bound to: 9600 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'BaudTickGen__parameterized0' [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:184]
+INFO: [Synth 8-6157] synthesizing module 'BaudTickGen__parameterized0' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:184]
 	Parameter ClkFrequency bound to: 25000000 - type: integer 
 	Parameter Baud bound to: 9600 - type: integer 
 	Parameter Oversampling bound to: 1 - type: integer 
 	Parameter AccWidth bound to: 20 - type: integer 
 	Parameter ShiftLimiter bound to: 3 - type: integer 
 	Parameter Inc bound to: 403 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'BaudTickGen__parameterized0' (8#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:184]
-INFO: [Synth 8-6155] done synthesizing module 'async_transmitter' (9#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:14]
-INFO: [Synth 8-6155] done synthesizing module 'MiniMIPS32_Lite_FullSyS' (10#1) [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'BaudTickGen__parameterized0' (15#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:184]
+INFO: [Synth 8-6155] done synthesizing module 'async_transmitter' (16#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/async.sv:14]
+WARNING: [Synth 8-87] always_comb on 'r_dce_reg' did not result in combinational logic [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:87]
+WARNING: [Synth 8-87] always_comb on 'r_dwe_reg' did not result in combinational logic [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:88]
+WARNING: [Synth 8-87] always_comb on 'r_daddr_reg' did not result in combinational logic [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:89]
+WARNING: [Synth 8-87] always_comb on 'r_din_reg' did not result in combinational logic [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:90]
+WARNING: [Synth 8-87] always_comb on 'r_ice_reg' did not result in combinational logic [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:75]
+WARNING: [Synth 8-87] always_comb on 'r_iaddr_reg' did not result in combinational logic [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:74]
+WARNING: [Synth 8-87] always_comb on 'dout_reg' did not result in combinational logic [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:52]
+WARNING: [Synth 8-3848] Net anL in module/entity MiniMIPS32_Lite_FullSyS does not have driver. [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:12]
+WARNING: [Synth 8-3848] Net a_to_gL in module/entity MiniMIPS32_Lite_FullSyS does not have driver. [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:13]
+WARNING: [Synth 8-3848] Net anH in module/entity MiniMIPS32_Lite_FullSyS does not have driver. [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:14]
+WARNING: [Synth 8-3848] Net a_to_gH in module/entity MiniMIPS32_Lite_FullSyS does not have driver. [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:15]
+WARNING: [Synth 8-3848] Net leds in module/entity MiniMIPS32_Lite_FullSyS does not have driver. [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:16]
+INFO: [Synth 8-6155] done synthesizing module 'MiniMIPS32_Lite_FullSyS' (17#1) [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:4]
+WARNING: [Synth 8-3331] design id_stage has unconnected port cpu_clk_50M
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anL[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anL[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anL[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anL[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anH[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anH[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anH[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anH[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 862.961 ; gain = 287.855
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 883.684 ; gain = 309.363
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -102,51 +150,59 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 862.961 ; gain = 287.855
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 883.684 ; gain = 309.363
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 862.961 ; gain = 287.855
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 883.684 ; gain = 309.363
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 862.961 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.036 . Memory (MB): peak = 883.684 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync/clk_sync/clk_sync_in_context.xdc] for cell 'clk_sync0'
-Finished Parsing XDC File [d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync/clk_sync/clk_sync_in_context.xdc] for cell 'clk_sync0'
-Parsing XDC File [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]
-Finished Parsing XDC File [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/MiniMIPS32_Lite_FullSyS_propImpl.xdc].
+Parsing XDC File [e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom/inst_rom_in_context.xdc] for cell 'inst_rom0'
+Finished Parsing XDC File [e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom/inst_rom_in_context.xdc] for cell 'inst_rom0'
+Parsing XDC File [e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom/inst_rom_in_context.xdc] for cell 'inst_rom1'
+Finished Parsing XDC File [e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/inst_rom/inst_rom/inst_rom_in_context.xdc] for cell 'inst_rom1'
+Parsing XDC File [e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/data_ram/data_ram/data_ram_in_context.xdc] for cell 'data_ram0'
+Finished Parsing XDC File [e:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/data_ram/data_ram/data_ram_in_context.xdc] for cell 'data_ram0'
+Parsing XDC File [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]
+Finished Parsing XDC File [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/constrs_1/new/MiniMIPS32_Lite_FullSyS.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/MiniMIPS32_Lite_FullSyS_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/MiniMIPS32_Lite_FullSyS_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 986.594 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 986.820 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 986.594 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 986.820 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:10 . Memory (MB): peak = 986.820 ; gain = 412.500
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tftg256-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:10 . Memory (MB): peak = 986.820 ; gain = 412.500
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property IO_BUFFER_TYPE = NONE for sys_clk_25M. (constraint file  d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync/clk_sync/clk_sync_in_context.xdc, line 3).
-Applied set_property CLOCK_BUFFER_TYPE = NONE for sys_clk_25M. (constraint file  d:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.srcs/sources_1/ip/clk_sync/clk_sync/clk_sync_in_context.xdc, line 4).
-Applied set_property DONT_TOUCH = true for clk_sync0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for inst_rom0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for inst_rom1. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for data_ram0. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:10 . Memory (MB): peak = 986.820 ; gain = 412.500
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-5587] ROM size for "btn_num" is below threshold of ROM address width. It will be mapped to LUTs
 INFO: [Synth 8-802] inferred FSM for state register 'RxD_state_reg' in module 'async_receiver'
 INFO: [Synth 8-802] inferred FSM for state register 'TxD_state_reg' in module 'async_transmitter'
+WARNING: [Synth 8-3936] Found unconnected internal register 'r_iaddr_reg' and it is trimmed from '32' to '13' bits. [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:74]
+WARNING: [Synth 8-3936] Found unconnected internal register 'r_daddr_reg' and it is trimmed from '32' to '13' bits. [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:89]
+WARNING: [Synth 8-327] inferring latch for variable 'mem_dre_o_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/mem_stage.v:57]
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -179,8 +235,15 @@ INFO: [Synth 8-3354] encoded FSM with state register 'RxD_state_reg' using encod
                  iSTATE1 |                      10000000000 |                             0010
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'TxD_state_reg' using encoding 'one-hot' in module 'async_transmitter'
+WARNING: [Synth 8-327] inferring latch for variable 'dout_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:52]
+WARNING: [Synth 8-327] inferring latch for variable 'r_dce_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:87]
+WARNING: [Synth 8-327] inferring latch for variable 'r_dwe_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:88]
+WARNING: [Synth 8-327] inferring latch for variable 'r_daddr_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:89]
+WARNING: [Synth 8-327] inferring latch for variable 'r_din_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:90]
+WARNING: [Synth 8-327] inferring latch for variable 'r_ice_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:75]
+WARNING: [Synth 8-327] inferring latch for variable 'r_iaddr_reg' [E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.srcs/sources_1/new/MiniMIPS32_Lite_FullSyS.sv:74]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:10 . Memory (MB): peak = 986.820 ; gain = 412.500
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -193,28 +256,40 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
+	   2 Input     32 Bit       Adders := 3     
+	   3 Input     32 Bit       Adders := 1     
 	   2 Input     21 Bit       Adders := 2     
-	   2 Input     20 Bit       Adders := 2     
 	   2 Input      3 Bit       Adders := 1     
-	   2 Input      2 Bit       Adders := 3     
+	   2 Input      2 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
 +---Registers : 
+	               32 Bit    Registers := 46    
 	               21 Bit    Registers := 2     
-	               20 Bit    Registers := 2     
-	                8 Bit    Registers := 5     
-	                4 Bit    Registers := 5     
-	                3 Bit    Registers := 1     
-	                2 Bit    Registers := 4     
-	                1 Bit    Registers := 7     
+	                8 Bit    Registers := 6     
+	                5 Bit    Registers := 3     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 12    
 +---Muxes : 
-	   2 Input     20 Bit        Muxes := 2     
+	   2 Input     32 Bit        Muxes := 32    
+	   3 Input     32 Bit        Muxes := 3     
+	   4 Input     32 Bit        Muxes := 1     
+	   6 Input     32 Bit        Muxes := 1     
 	  11 Input     11 Bit        Muxes := 2     
 	   2 Input     11 Bit        Muxes := 2     
-	   2 Input      8 Bit        Muxes := 1     
-	  17 Input      4 Bit        Muxes := 1     
-	   4 Input      4 Bit        Muxes := 4     
+	   2 Input      8 Bit        Muxes := 4     
+	   2 Input      5 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 2     
+	   5 Input      4 Bit        Muxes := 2     
 	  11 Input      4 Bit        Muxes := 2     
-	   2 Input      2 Bit        Muxes := 3     
-	   2 Input      1 Bit        Muxes := 4     
+	   3 Input      2 Bit        Muxes := 2     
+	   7 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 46    
+	   5 Input      1 Bit        Muxes := 2     
 	  11 Input      1 Bit        Muxes := 2     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
@@ -226,32 +301,91 @@ Hierarchical RTL Component report
 Module MiniMIPS32_Lite_FullSyS 
 Detailed RTL Component Info : 
 +---Registers : 
-	                8 Bit    Registers := 3     
+	               32 Bit    Registers := 1     
+	                8 Bit    Registers := 2     
 	                4 Bit    Registers := 1     
 	                1 Bit    Registers := 3     
-Module btn_array 
-Detailed RTL Component Info : 
 +---Muxes : 
-	  17 Input      4 Bit        Muxes := 1     
-Module clken 
+	   2 Input     32 Bit        Muxes := 3     
+	   2 Input      8 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 5     
+Module if_stage 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     20 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 1     
 +---Registers : 
-	               20 Bit    Registers := 1     
+	               32 Bit    Registers := 2     
 	                1 Bit    Registers := 1     
 +---Muxes : 
-	   2 Input     20 Bit        Muxes := 1     
-Module x7seg_scan 
+	   2 Input     32 Bit        Muxes := 5     
+Module ifid_reg 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 2     
+Module id_stage 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input      2 Bit       Adders := 1     
-+---Registers : 
-	                4 Bit    Registers := 2     
-	                2 Bit    Registers := 1     
+	   2 Input     32 Bit       Adders := 1     
+	   3 Input     32 Bit       Adders := 1     
 +---Muxes : 
-	   4 Input      4 Bit        Muxes := 2     
-	   2 Input      2 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 13    
+	   3 Input     32 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 3     
+Module regfile 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 32    
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 8     
+	   2 Input      1 Bit        Muxes := 32    
+Module idexe_reg 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 4     
+	                8 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
+Module exe_stage 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   3 Input     32 Bit        Muxes := 2     
+	   4 Input     32 Bit        Muxes := 1     
+	   7 Input      2 Bit        Muxes := 1     
+Module exemem_reg 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 3     
+	                8 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
+Module mem_stage 
+Detailed RTL Component Info : 
++---Muxes : 
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 2     
+	   5 Input      4 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+	   5 Input      1 Bit        Muxes := 2     
+Module memwb_reg 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
+Module wb_stage 
+Detailed RTL Component Info : 
++---Muxes : 
+	   6 Input     32 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 1     
 Module BaudTickGen 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -308,9 +442,95 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
-INFO: [Synth 8-5587] ROM size for "btnA/btn_num" is below threshold of ROM address width. It will be mapped to LUTs
+WARNING: [Synth 8-3331] design id_stage has unconnected port cpu_clk_50M
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anL[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anL[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anL[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anL[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gL[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anH[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anH[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anH[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port anH[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port a_to_gH[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port leds[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port dip_sw[0]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[7]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[6]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[5]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[4]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[3]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[2]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[1]
+WARNING: [Synth 8-3331] design MiniMIPS32_Lite_FullSyS has unconnected port btn_rc[0]
+INFO: [Synth 8-3886] merging instance 'cpu/idexe_reg0/exe_alutype_reg[1]' (FDR) to 'cpu/idexe_reg0/exe_aluop_reg[2]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/\idexe_reg0/exe_aluop_reg[5] )
+WARNING: [Synth 8-3332] Sequential element (r_daddr_reg[1]) is unused and will be removed from module MiniMIPS32_Lite_FullSyS.
+WARNING: [Synth 8-3332] Sequential element (r_daddr_reg[0]) is unused and will be removed from module MiniMIPS32_Lite_FullSyS.
+WARNING: [Synth 8-3332] Sequential element (r_iaddr_reg[1]) is unused and will be removed from module MiniMIPS32_Lite_FullSyS.
+WARNING: [Synth 8-3332] Sequential element (r_iaddr_reg[0]) is unused and will be removed from module MiniMIPS32_Lite_FullSyS.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][6] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][8] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][12] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][10] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][20] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][18] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][16] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][14] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][28] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][27] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][30] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][29] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][22] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][24] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][26] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][19] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][13] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][21] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][15] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][23] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][7] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][9] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][17] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][25] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cpu/regfile0/\regs_reg[0][2] )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:20 . Memory (MB): peak = 986.820 ; gain = 412.500
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -322,13 +542,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:26 . Memory (MB): peak = 986.820 ; gain = 412.500
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Timing Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:27 . Memory (MB): peak = 986.820 ; gain = 412.500
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -339,8 +559,40 @@ Report RTL Partitions:
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[2]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[2]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[11]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[11]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[12]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[12]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[13]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[13]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[14]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[14]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[15]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[15]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[0]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[0]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[1]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[1]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[3]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[3]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[4]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[4]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[5]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[5]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[6]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[6]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[7]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[7]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[8]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[8]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[10]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[10]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[9]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[9]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[16]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[16]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[17]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[17]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[18]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[18]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[19]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[19]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[21]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[21]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[30]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[30]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[31]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[31]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[28]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[28]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[23]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[23]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[24]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[24]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[25]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[25]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[26]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[26]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[27]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[27]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[29]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[29]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[20]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[20]'
+INFO: [Synth 8-3886] merging instance 'last_daddr_reg[22]' (FDR) to 'cpu/memwb_reg0/wb_dreg_reg[22]'
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Technology Mapping : Time (s): cpu = 00:00:19 ; elapsed = 00:00:28 . Memory (MB): peak = 1056.645 ; gain = 482.324
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -364,13 +616,13 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished IO Insertion : Time (s): cpu = 00:00:22 ; elapsed = 00:00:31 . Memory (MB): peak = 1056.645 ; gain = 482.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:22 ; elapsed = 00:00:31 . Memory (MB): peak = 1056.645 ; gain = 482.324
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -389,25 +641,25 @@ Report Check Netlist:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:22 ; elapsed = 00:00:31 . Memory (MB): peak = 1056.645 ; gain = 482.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:22 ; elapsed = 00:00:31 . Memory (MB): peak = 1056.645 ; gain = 482.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:31 . Memory (MB): peak = 1056.645 ; gain = 482.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:22 ; elapsed = 00:00:31 . Memory (MB): peak = 1056.645 ; gain = 482.324
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -417,71 +669,77 @@ Report BlackBoxes:
 +------+--------------+----------+
 |      |BlackBox name |Instances |
 +------+--------------+----------+
-|1     |clk_sync      |         1|
+|1     |inst_rom      |         2|
+|2     |data_ram      |         1|
 +------+--------------+----------+
 
 Report Cell Usage: 
-+------+---------+------+
-|      |Cell     |Count |
-+------+---------+------+
-|1     |clk_sync |     1|
-|2     |CARRY4   |    20|
-|3     |LUT1     |    15|
-|4     |LUT2     |    12|
-|5     |LUT3     |    12|
-|6     |LUT4     |    43|
-|7     |LUT5     |    10|
-|8     |LUT6     |    41|
-|9     |FDCE     |    67|
-|10    |FDPE     |     8|
-|11    |FDRE     |   102|
-|12    |FDSE     |     5|
-|13    |IBUF     |    18|
-|14    |OBUF     |    33|
-+------+---------+------+
++------+------------+------+
+|      |Cell        |Count |
++------+------------+------+
+|1     |data_ram    |     1|
+|2     |inst_rom    |     1|
+|3     |inst_rom__2 |     1|
+|4     |BUFG        |     3|
+|5     |CARRY4      |    48|
+|6     |LUT1        |    16|
+|7     |LUT2        |   141|
+|8     |LUT3        |    32|
+|9     |LUT4        |   268|
+|10    |LUT5        |   251|
+|11    |LUT6        |  1030|
+|12    |MUXF7       |   256|
+|13    |MUXF8       |   128|
+|14    |FDRE        |  1402|
+|15    |FDSE        |    11|
+|16    |LD          |    94|
+|17    |IBUF        |     3|
+|18    |OBUF        |     1|
+|19    |OBUFT       |    32|
++------+------------+------+
 
 Report Instance Areas: 
-+------+-------------+----------------------------+------+
-|      |Instance     |Module                      |Cells |
-+------+-------------+----------------------------+------+
-|1     |top          |                            |   388|
-|2     |  btnA       |btn_array                   |     6|
-|3     |  ext_uart_r |async_receiver              |    75|
-|4     |    tickgen  |BaudTickGen                 |    39|
-|5     |  ext_uart_t |async_transmitter           |    67|
-|6     |    tickgen  |BaudTickGen__parameterized0 |    35|
-|7     |  segH       |x7seg                       |    80|
-|8     |    U0       |clken_1                     |    53|
-|9     |    U1       |x7seg_scan_2                |    20|
-|10    |    U2       |x7seg_dec_3                 |     7|
-|11    |  segL       |x7seg_0                     |    75|
-|12    |    U0       |clken                       |    52|
-|13    |    U1       |x7seg_scan                  |    16|
-|14    |    U2       |x7seg_dec                   |     7|
-+------+-------------+----------------------------+------+
++------+----------------+----------------------------+------+
+|      |Instance        |Module                      |Cells |
++------+----------------+----------------------------+------+
+|1     |top             |                            |  3812|
+|2     |  cpu           |MiniMIPS32                  |  3423|
+|3     |    exemem_reg0 |exemem_reg                  |   386|
+|4     |    idexe_reg0  |idexe_reg                   |   678|
+|5     |    if_stage0   |if_stage                    |    66|
+|6     |    ifid_reg0   |ifid_reg                    |   122|
+|7     |    mem_stage0  |mem_stage                   |     4|
+|8     |    memwb_reg0  |memwb_reg                   |   195|
+|9     |    regfile0    |regfile                     |  1972|
+|10    |  ext_uart_r    |async_receiver              |    74|
+|11    |    tickgen     |BaudTickGen                 |    39|
+|12    |  ext_uart_t    |async_transmitter           |    66|
+|13    |    tickgen     |BaudTickGen__parameterized0 |    35|
++------+----------------+----------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 986.594 ; gain = 411.488
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:22 ; elapsed = 00:00:31 . Memory (MB): peak = 1056.645 ; gain = 482.324
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:28 ; elapsed = 00:00:39 . Memory (MB): peak = 986.594 ; gain = 287.855
-Synthesis Optimization Complete : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 986.594 ; gain = 411.488
+Synthesis finished with 0 errors, 0 critical warnings and 63 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:29 . Memory (MB): peak = 1056.645 ; gain = 379.188
+Synthesis Optimization Complete : Time (s): cpu = 00:00:22 ; elapsed = 00:00:31 . Memory (MB): peak = 1056.645 ; gain = 482.324
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 995.723 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 20 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.031 . Memory (MB): peak = 1056.645 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 526 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 995.723 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1056.645 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 94 instances were transformed.
+  LD => LDCE: 94 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-40 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+118 Infos, 126 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:49 ; elapsed = 00:00:51 . Memory (MB): peak = 995.723 ; gain = 694.957
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 995.723 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:36 . Memory (MB): peak = 1056.645 ; gain = 756.090
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1056.645 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
-INFO: [Common 17-1381] The checkpoint 'D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.runs/synth_1/MiniMIPS32_Lite_FullSyS.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint 'E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.runs/synth_1/MiniMIPS32_Lite_FullSyS.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file MiniMIPS32_Lite_FullSyS_utilization_synth.rpt -pb MiniMIPS32_Lite_FullSyS_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Sep  5 14:48:21 2023...
+INFO: [Common 17-206] Exiting Vivado at Wed Dec 25 20:13:29 2024...

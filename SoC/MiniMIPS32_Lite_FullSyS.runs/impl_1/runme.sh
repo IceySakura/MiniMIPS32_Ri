@@ -11,9 +11,9 @@ echo "Please update the PATH and LD_LIBRARY_PATH variables below, before executi
 exit
 
 if [ -z "$PATH" ]; then
-  PATH=D:/Xilinx/Vivado/2019.2/ids_lite/ISE/bin/nt64;D:/Xilinx/Vivado/2019.2/ids_lite/ISE/lib/nt64:D:/Xilinx/Vivado/2019.2/bin
+  PATH=E:/Xilinx/Vivado/2019.2/ids_lite/ISE/bin/nt64;E:/Xilinx/Vivado/2019.2/ids_lite/ISE/lib/nt64:E:/Xilinx/Vivado/2019.2/bin
 else
-  PATH=D:/Xilinx/Vivado/2019.2/ids_lite/ISE/bin/nt64;D:/Xilinx/Vivado/2019.2/ids_lite/ISE/lib/nt64:D:/Xilinx/Vivado/2019.2/bin:$PATH
+  PATH=E:/Xilinx/Vivado/2019.2/ids_lite/ISE/bin/nt64;E:/Xilinx/Vivado/2019.2/ids_lite/ISE/lib/nt64:E:/Xilinx/Vivado/2019.2/bin:$PATH
 fi
 export PATH
 
@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='D:/Work/vivado_project/MiniMIPS32_Lite_FullSyS/MiniMIPS32_Lite_FullSyS.runs/impl_1'
+HD_PWD='E:/Labs/COAProj/MiniMIPS32_Ri/SoC/MiniMIPS32_Lite_FullSyS.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -41,7 +41,7 @@ EAStep()
 }
 
 # pre-commands:
-/bin/touch .init_design.begin.rst
+/bin/touch .write_bitstream.begin.rst
 EAStep vivado -log MiniMIPS32_Lite_FullSyS.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source MiniMIPS32_Lite_FullSyS.tcl -notrace
 
 
